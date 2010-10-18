@@ -1,0 +1,74 @@
+<% content_for :page_body do %>
+
+	<% if @team.new? %>
+		<h1>New team</h1>
+	<% else %>
+		<h1>Update team</h1>
+	<% end %>
+
+	<% form_for(@team, @form[:endpoint], :method => @form[:method], :id => 'team-edit') do |f| %>
+		<% unless @team.new? %>
+			<%= f.hidden_field(:id) %>
+		<% end %>
+		<ul>
+			<li>
+				<label>Name</label><br />
+				<%= f.text_field(:name) %>
+				<label><%= f.check_box(:definite_article)%> Needs "the"?</label>
+			</li>
+
+			<li>
+				<label>League</label><br />
+				<%= f.text_field(:league) %>
+			</li>
+
+			<li>
+				<label><%= f.radio_button(:sport, :value => 'Soccer') %> Soccer</label>
+				<label><%= f.radio_button(:sport, :value => 'Football') %> Football</label>
+				<label><%= f.radio_button(:sport, :value => 'Baseball') %> Baseball</label>
+				<label><%= f.radio_button(:sport, :value => 'Basketball') %> Basketball</label>
+				<label><%= f.radio_button(:sport, :value => 'Hockey') %> Hockey</label>
+			</li>
+
+
+			<li>
+				<label>City</label><br />
+				<%= f.text_field(:city) %>
+			</li>
+
+			<li>
+				<label>Country</label><br />
+				<%= f.text_field(:country) %>
+			</li>
+
+
+			<li>
+				<label>Website</label><br />
+				<%= f.text_field(:url) %>
+			</li>
+
+			<li>
+				<label>Twitter</label><br />
+				<%= f.text_field(:twitter) %>
+			</li>
+
+			<li>
+				<%= f.submit('Save') %>
+			</li>
+		</ul>
+	<% end %>
+	
+	<% if @team.new? %>
+		<table cellpadding="5" style="border-collapse: collapse;">
+			<style type="text/css" media="screen">
+				td { padding: 5px; }
+			</style>
+			<% Team.all(:order => 'league, name').each do |t| %>
+				<tr>
+					<td><%= t.league %></td>
+					<td><%= "<a href='#{t.permalink}/edit'>#{t.name}</a>" %></td>	
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+<% end %>

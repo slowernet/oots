@@ -1,0 +1,96 @@
+<!doctype html> 
+<html lang="en"> 
+<head>
+	<meta charset="utf-8">
+
+	<title><%= yield_content :page_title %>Out of Town Sports</title>
+
+	<!--[if IE]><![endif]-->	<!-- http://bit.ly/9GcFnC -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"> -->
+	
+	<meta name="description" content="Out of Town Sports (OOTS) is a directory of places where you can watch your team in any city" />
+	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, directory" />
+	
+	<%= stylesheet_link_tag "/stylesheets/reset.css", 
+		"/stylesheets/public.css", 
+		"/stylesheets/custom-theme/jquery-ui-1.8.5.custom.css", 
+		:cache => "/stylesheets/bundles/public.css" %>
+	
+	<style type="text/css" media="screen">
+	</style>
+	<%= yield_content :page_head %>
+</head>
+
+<body>
+	<div id="page-container">
+		<div id="page-header">
+			<a href="/" class="site-title">Out of Town Sports</a>
+		</div>
+		<div id="page-body">
+			<%= yield_content :page_body %>
+		</div>
+		<div id="page-footer">
+			<ul>
+				<li><a href="/teams/new">New team</a></li>
+				<li><a href="/venues/new">New venue</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<%= javascript_include_tag "/javascripts/jquery.js",
+		"/javascripts/jquery-ui-1.8.5.custom.min.js",
+		"/javascripts/jquery.yql.js",
+		"/javascripts/jquery.cookies.js",
+		:cache => "/javascripts/bundles/public.js" 
+	%>
+	
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+
+		$('#search-team').focus().autocomplete({ 
+			source: <%= @teams.to_json %>,
+			select: function(e, ui) {
+				$(this).blur().closest('#search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
+				ui.item.definite_article ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
+				$.getJSON('/venues/search.js?' + $.param($(this).closest('#search-form').data()) + '&callback=?', function() {
+					
+				});
+			}
+		});
+		
+		if ((c = $.cookies.get('search-city')) && c.lat) {
+			$('#search-city').html(c.city).addClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
+		}
+		
+		if ($('#search-city').length && navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var c = position.coords;
+				$.yql("select * from geo.placefinder where text='" + c.latitude + " " + c.longitude + "' and gflags='R'", 
+					function(data) {
+						var r = data.query.results['Result'];
+						$.cookies.set('search-city', { city: r.city, lat: c.latitude, lon: c.longitude });
+						$('#search-city').html(r.city).removeClass('preliminary').closest('#search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);
+					}
+				);
+			}, function(m) {
+				console.log(m);
+			});
+		}
+	});
+	</script>
+	
+	<script type="text/javascript" charset="utf-8">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-19133487-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; 
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</body>
+</html>
