@@ -59,7 +59,9 @@ get '/venues/search' do
 	respond_to do |wants|
 		wants.html { erb :'venues/search' }
 		wants.js {
+			
 		}
+	end
 end
 
 get '/teams/new' do
