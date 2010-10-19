@@ -13,10 +13,7 @@ require 'mongo_mapper'
 require 'bin'
 require 'joint'
 # require 'open-uri'
-# require 'sinatra/reloader' if development?	# http://github.com/rkh/sinatra-reloader
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
-# require 'nokogiri'
-# require 'prism'	# microformats; http://github.com/mwunsch/prism
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
 
@@ -31,7 +28,6 @@ end
 use Rack::JSONP
 
 configure do
-
 	dbname = "oots"
 	MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017, :logger => Logger.new('log/db.log')) if development?
 	MongoMapper.database = dbname
@@ -48,18 +44,26 @@ Dir[File.join(File.dirname(__FILE__), "app", "models", "*.rb")].each { |file| re
 Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |file| require file }
 # require 'app/helpers'
 
+#####################
+
 get '/' do
 	# @teams = CACHE.fetch("teams") do
-		@teams = Team.all.map { |t| { :label => t.name, :id => t.id, :definite_article => t.definite_article }}
+		@teams = Team.all(:order => 'name').map { |t| { :label => t.name, :id => t.id, :definite_article => t.definite_article }}
 	# end
 	erb :'venues/search'
 end
 
+get '/venues/new' do
+	@form = { :method => 'post', :endpoint => '/venues' }
+	@venue = Venue.new
+	erb :'venues/edit'
+end
+
 get '/venues/search' do
 	respond_to do |wants|
-		wants.html { erb :'venues/search' }
+		wants.html { redirect '/' }
 		wants.js {
-			
+			# Venue.where().sort($near : [50,50])
 		}
 	end
 end

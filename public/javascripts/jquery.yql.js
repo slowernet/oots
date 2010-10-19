@@ -30,7 +30,6 @@
                  var $self = this;
                  var successCallback = null;
                  var errorCallback = null;
-
                  if (typeof arguments[1] == 'object') {
                      query = $self._prepareYQLQuery(query, arguments[1]);
                      successCallback = arguments[2];

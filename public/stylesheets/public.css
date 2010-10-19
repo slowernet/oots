@@ -42,7 +42,8 @@ h1, h2, h3, h4 {
 }
 
 label {
-	font-size: 12px;
+	font-size: 13px;
+	color: #888;
 }
 
 /* http://net.tutsplus.com/tutorials/html-css-techniques/design-a-prettier-web-form-with-css-3/ */
@@ -73,7 +74,7 @@ input[type=text]:focus, textarea:focus {
 }
 
 #page-header {
-	padding: 20px 0 25px;
+	padding: 12px 0;
 	text-align: center;
 }
 
@@ -96,7 +97,7 @@ a.site-title {
 	font-family: 'AWConquerorInlineRegular';
 	font-size: 65px;
 	font-weight: normal;
-	color: red;
+	color: #449;
 	display: inline-block;
 }
 
@@ -123,12 +124,13 @@ a.site-title {
 	border: 1px solid #eee;
 }
 
-form#team-edit input[type=text] {
+#venue-search-form input[type=text],
+#team-edit input[type=text] {
 	font-family: 'CalibriRegular';
-	font-size: 17px;
-	width: 400px;
+	font-size: 20px;
+	width: 500px;
 }
 
-form#team-edit li {
+#team-edit li {
 	margin-bottom: 12pt;
 }

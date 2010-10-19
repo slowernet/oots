@@ -27,11 +27,16 @@
 		<div id="page-header">
 			<a href="/" class="site-title">Out of Town Sports</a>
 		</div>
+	</div>
+		<div id="ad-bar" style="height: 110px; background-color: #eef; margin-bottom: 20px; border-top: 1px solid #ccd;  border-bottom: 1px solid #ccd;">
+		</div>
+	<div id="page-container">
 		<div id="page-body">
 			<%= yield_content :page_body %>
 		</div>
 		<div id="page-footer">
 			<ul>
+				<li><a href="/">OOTS home</a></li>
 				<li><a href="/teams/new">New team</a></li>
 				<li><a href="/venues/new">New venue</a></li>
 			</ul>
@@ -42,43 +47,12 @@
 		"/javascripts/jquery-ui-1.8.5.custom.min.js",
 		"/javascripts/jquery.yql.js",
 		"/javascripts/jquery.cookies.js",
+		"/javascripts/underscore.js",
+		"/javascripts/public.js",
 		:cache => "/javascripts/bundles/public.js" 
 	%>
 	
-	<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-
-		$('#search-team').focus().autocomplete({ 
-			source: <%= @teams.to_json %>,
-			select: function(e, ui) {
-				$(this).blur().closest('#search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
-				ui.item.definite_article ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
-				$.getJSON('/venues/search.js?' + $.param($(this).closest('#search-form').data()) + '&callback=?', function() {
-					
-				});
-			}
-		});
-		
-		if ((c = $.cookies.get('search-city')) && c.lat) {
-			$('#search-city').html(c.city).addClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
-		}
-		
-		if ($('#search-city').length && navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(position) {
-				var c = position.coords;
-				$.yql("select * from geo.placefinder where text='" + c.latitude + " " + c.longitude + "' and gflags='R'", 
-					function(data) {
-						var r = data.query.results['Result'];
-						$.cookies.set('search-city', { city: r.city, lat: c.latitude, lon: c.longitude });
-						$('#search-city').html(r.city).removeClass('preliminary').closest('#search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);
-					}
-				);
-			}, function(m) {
-				console.log(m);
-			});
-		}
-	});
-	</script>
+	<%= yield_content :page_end %>
 	
 	<script type="text/javascript" charset="utf-8">
 		var _gaq = _gaq || [];
