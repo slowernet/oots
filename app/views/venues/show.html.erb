@@ -1,0 +1,28 @@
+<% content_for :page_body do %>
+	<h1><%= @venue.name %></h1>
+
+	<div style="margin: 1em 0;">
+		<%= @venue.address %>,
+		<%= @venue.city %>
+	</div>
+	
+	<div>
+		<a href='#' id="open-add-bond">&rarr; Add a team?</a>
+		<ul id="add-bond" style="display: block;">
+			<li>
+				<label>Team<br/>
+					<input type="text" name="team-name" id="bond-team-name" data-teams='<%= @teams.to_json %>'>
+				</label>
+			</li>
+			<li>
+				<label>Strength of bond</label><br/>
+				<label><%= radio_button_tag(:strength, :value => '1') %> Strong &ndash; games always shown, always people there to watch</label><br/>
+				<label><%= radio_button_tag(:strength, :value => '2') %> Medium &ndash; games usually shown, usually people there to watch</label><br/>
+				<label><%= radio_button_tag(:strength, :value => '3') %> Weak &ndash; games sometimes shown, sometimes people there to watch</label>
+			</li>
+			<label>Note<br/>
+				<input type="text" name="note" data-teams='<%= @teams.to_json %>'>
+			</label>
+		</ul>
+	</div>
+<% end %>

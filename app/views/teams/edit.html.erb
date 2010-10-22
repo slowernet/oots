@@ -58,13 +58,13 @@
 			</li>
 
 			<li>
-				<%= f.submit('Save') %>
+				<%= f.submit('Save', :class => 'rgbabutton large blue') %>
 			</li>
 		</ul>
 	<% end %>
 	
 	<% if @team.new? %>
-		<table cellpadding="5" style="border-collapse: collapse;">
+		<table cellpadding="5" style="border-collapse: collapse; border-top: 1px dashed #aaa;">
 			<style type="text/css" media="screen">
 				td { padding: 5px; }
 			</style>

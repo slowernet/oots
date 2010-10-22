@@ -1,47 +1,38 @@
 <% content_for :page_body do %>
 
-	<% if @venue.new? %>
-		<h1>New venue</h1>
-	<% else %>
-		<h1>Update venue</h1>
-	<% end %>
+	<h1><%= @venue.new? ? "New" : "Update" %>  venue</h1>
 
-	<ul class="form" id="venue-search-form">
+	<ul class="form" id="venue-pre-edit-search">
 		<li>
-			<label>Rough location (zip, city + state, etc.)</label><br />
+			<label>Rough location (zipcode, city + state, etc.)</label><br />
 			<%= text_field_tag(:league, :id => 'venue-search-location') %>
 		</li>
 		<li>
 			<label>Name</label><br />
 			<%= text_field_tag(:name, :id => 'venue-search-name') %>
 		</li>
-		
-		<ul id="venue-search-results"></ul>
 	</ul>
-	
+
 	<% form_for(@venue, @form[:endpoint], :method => @form[:method], :id => 'venue-edit', :style => 'display: none;') do |f| %>
 		<% unless @venue.new? %>
 			<%= f.hidden_field(:id) %>
 		<% end %>
 		<ul>
+			<%= f.hidden_field(:foursquare_id) %>
 			<li>
 				<label>Name</label><br />
 				<%= f.text_field(:name) %>
 			</li>
 
 			<li>
-				<label>League</label><br />
-				<%= f.text_field(:league) %>
+				<label>address</label><br />
+				<%= f.text_field(:address) %>
 			</li>
 
 			<li>
-				<label><%= f.radio_button(:sport, :value => 'Soccer') %> Soccer</label>
-				<label><%= f.radio_button(:sport, :value => 'Football') %> Football</label>
-				<label><%= f.radio_button(:sport, :value => 'Baseball') %> Baseball</label>
-				<label><%= f.radio_button(:sport, :value => 'Basketball') %> Basketball</label>
-				<label><%= f.radio_button(:sport, :value => 'Hockey') %> Hockey</label>
+				<label>Crossstreet</label><br />
+				<%= f.text_field(:crossstreet) %>
 			</li>
-
 
 			<li>
 				<label>City</label><br />
@@ -49,10 +40,19 @@
 			</li>
 
 			<li>
-				<label>Country</label><br />
-				<%= f.text_field(:country) %>
+				<label>State</label><br />
+				<%= f.text_field(:state) %>
 			</li>
 
+			<li>
+				<label>Zipcode</label><br />
+				<%= f.text_field(:zip) %>
+			</li>
+
+			<li>
+				<label>Phone</label><br />
+				<%= f.text_field(:phone) %>
+			</li>
 
 			<li>
 				<label>Website</label><br />
@@ -65,7 +65,8 @@
 			</li>
 
 			<li>
-				<%= f.submit('Save') %>
+				<label>&nbsp;</label><br />
+				<%= f.submit('Save', :class => 'rgbabutton large blue') %>
 			</li>
 		</ul>
 	<% end %>
