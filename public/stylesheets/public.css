@@ -49,6 +49,7 @@ label {
 /* http://net.tutsplus.com/tutorials/html-css-techniques/design-a-prettier-web-form-with-css-3/ */
 
 input[type=text], textarea {
+	font-family: 'CalibriRegular';
 	padding: 5px 5px 0px 5px;
 	border: solid 1px #e4e4e4;
 	outline: 0;
@@ -119,12 +120,17 @@ a.site-title {
 /*	text-transform: uppercase;*/
 	width: 300px;
 	font-size: 30px; 
-	color: black;
-	font-family: 'CalibriRegular';
-	border: 1px solid #eee;
+/*	color: black;*/
+/*	border: 1px solid #eee;*/
 }
 
-#venue-search-form input[type=text],
+#bond-team-name {
+	width: 300px;
+	font-size: 20px; 	
+}
+
+#venue-edit input[type=text],
+#venue-pre-edit-search input[type=text],
 #team-edit input[type=text] {
 	font-family: 'CalibriRegular';
 	font-size: 20px;
@@ -134,3 +140,59 @@ a.site-title {
 #team-edit li {
 	margin-bottom: 12pt;
 }
+
+/* http://www.zurb.com/blog_uploads/0000/0617/buttons-03.html */
+
+.rgbabutton, .rgbabutton:visited {
+	background: #222 url(/images/button-overlay.png) repeat-x; 
+	display: inline-block; 
+	padding: 5px 11px; 
+	color: #fff; 
+	text-decoration: none;
+	border-width: 0;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	font-family: Helvetica, sans-serif;
+}
+.rgbabutton:hover { background-color: #111; color: #fff; }
+.rgbabutton:active { top: 1px; }
+
+.tiny.rgbabutton, .tiny.rgbabutton:visited { 
+	font-size: 10px; 
+	padding: 4px 5px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	font-family: inherit;
+}
+
+.small.rgbabutton, .small.rgbabutton:visited { font-size: 11px; padding: 5px 9px; }
+.rgbabutton, .rgbabutton:visited, .medium.rgbabutton,  .medium.rgbabutton:visited { 
+	font-size: 13px; 
+	font-weight: bold; 
+	line-height: 1; 
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25); 
+}
+.large.rgbabutton, .large.rgbabutton:visited { font-size: 14px; padding: 6px 14px; }
+
+.green.rgbabutton, .green.rgbabutton:visited		{ background-color: #5b0; }
+.green.rgbabutton:hover						{ background-color: #5d2; }
+.blue.rgbabutton, .blue.rgbabutton:visited		{ background-color: #05b; }
+.blue.rgbabutton:hover							{ background-color: #07d; }
+.red.rgbabutton, .red.rgbabutton:visited			{ background-color: #e33100; }
+.red.rgbabutton:hover							{ background-color: #872300; }
+.magenta.rgbabutton, .magenta.rgbabutton:visited		{ background-color: #b05; }
+.magenta.rgbabutton:hover							{ background-color: #d47; }
+.orange.rgbabutton, .orange.rgbabutton:visited		{ background-color: #ff5c00; }
+.orange.rgbabutton:hover							{ background-color: #d45500; }
+.yellow.rgbabutton, .yellow.rgbabutton:visited		{ background-color: #ffb515; }
+.yellow.rgbabutton:hover							{ background-color: #fc9200; }
+.gray.rgbabutton, .gray.rgbabutton:visited		{ background-color: #999; }
+.gray.rgbabutton:hover						{ background-color: #aaa; }

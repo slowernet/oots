@@ -2,6 +2,7 @@ class Bond
 	include MongoMapper::EmbeddedDocument
 
 	key :team_id, ObjectId
+	key :strength
 	key :note, String
 end
 
@@ -28,8 +29,8 @@ class Venue
 
 	ensure_index [[ 'latlon', '2d' ]]	
 	
-	before_validation do |place|
-		place.slug = "#{place.name} #{place.city}".dasherize
+	before_validation do |venue|
+		venue.slug = "#{venue.name} #{venue.address} #{venue.city}".dasherize
 	end
 
 	def permalink
