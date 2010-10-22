@@ -2,7 +2,12 @@ $(document).ready(function() {
 	_.templateSettings = { interpolate : /\#\{(.+?)\}/g };
 
 	$('#search-team').focus().autocomplete({ 
-		source: $('#search-team').data('teams'),
+		source: function(r, cb) {
+			var teams = _.select($('#search-team').data('teams'), function(team) {
+				return (team.label + " " + (team.altnames == null ? '' : team.altnames)).match(new RegExp(r.term, 'i')) != null; 
+			});
+			cb(teams);
+		},
 		select: function(e, ui) {
 			$(this).blur().closest('#search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
 			ui.item.definite_article ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();

@@ -48,7 +48,12 @@ Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |fil
 
 get '/' do
 	# @teams = CACHE.fetch("teams") do
-		@teams = Team.all(:order => 'name').map { |t| { :label => t.name, :id => t.id, :definite_article => t.definite_article }}
+		@teams = Team.all(:order => 'name').map { |t| { 
+			:id => t.id, 
+			:label => t.name, 
+			:altnames => t.altnames, 
+			:definite_article => t.definite_article
+		}}
 	# end
 	erb :'venues/search'
 end

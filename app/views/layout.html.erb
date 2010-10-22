@@ -28,21 +28,37 @@
 			<a href="/" class="site-title">Out of Town Sports</a>
 		</div>
 	</div>
-		<div id="ad-bar" style="height: 110px; background-color: #eef; margin-bottom: 20px; border-top: 1px solid #ccd;  border-bottom: 1px solid #ccd;">
+	
+	<div id="ad-bar" style="height: 110px; background-color: #eef; margin-bottom: 22px; border-top: 1px solid #ccd;  border-bottom: 1px solid #ccd;">
+		<div style="width: 728px; margin: 10px auto;">
+			<script type="text/javascript">
+				google_ad_client = "pub-0057027191769219";
+				/* 728x90, created 10/19/10 */
+				google_ad_slot = "0941801210";
+				google_ad_width = 728;
+				google_ad_height = 90;
+			</script>
+			<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 		</div>
+	</div>
+
 	<div id="page-container">
 		<div id="page-body">
 			<%= yield_content :page_body %>
 		</div>
 		<div id="page-footer">
-			<ul>
+			<ul style="float: left; width: 235px;">
 				<li><a href="/">OOTS home</a></li>
 				<li><a href="/teams/new">New team</a></li>
 				<li><a href="/venues/new">New venue</a></li>
 			</ul>
+			<ul style="float: left; width: 235px;">
+				<li><a href="http://twitter.com/outoftownsports">Twitter</a></li>
+			</ul>
+
 		</div>
 	</div>
-
+	
 	<%= javascript_include_tag "/javascripts/jquery.js",
 		"/javascripts/jquery-ui-1.8.5.custom.min.js",
 		"/javascripts/jquery.yql.js",

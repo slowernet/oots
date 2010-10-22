@@ -7,7 +7,7 @@ class Team
 	key :definite_article, Boolean
 	key :sport, String
 	key :league, String
-	# key :altnames, Array	
+	key :altnames, String	
 	key :city, String
 	key :country, String
 	key :url, String
