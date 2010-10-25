@@ -7,7 +7,7 @@
 	</div>
 	
 	<div>
-		<a href='#' id="open-add-bond">&rarr; Add a team?</a>
+		<a href='#' id="open-add-bond">&rarr; Associate a team with this venue?</a>
 		<ul id="add-bond" style="display: block;">
 			<li>
 				<label>Team<br/>
@@ -15,14 +15,19 @@
 				</label>
 			</li>
 			<li>
-				<label>Strength of bond</label><br/>
-				<label><%= radio_button_tag(:strength, :value => '1') %> Strong &ndash; games always shown, always people there to watch</label><br/>
-				<label><%= radio_button_tag(:strength, :value => '2') %> Medium &ndash; games usually shown, usually people there to watch</label><br/>
-				<label><%= radio_button_tag(:strength, :value => '3') %> Weak &ndash; games sometimes shown, sometimes people there to watch</label>
+				<label>Game is on</label>
+				<label><%= radio_button_tag(:strength, :value => '1') %> Always</label>
+				<label><%= radio_button_tag(:strength, :value => '2') %> Often</label>
+				<label><%= radio_button_tag(:strength, :value => '3') %> Sometimes &ndash; check first</label>
 			</li>
-			<label>Note<br/>
-				<input type="text" name="note" data-teams='<%= @teams.to_json %>'>
-			</label>
+			<li>
+				<label>Note<br/>
+					<input type="text" name="note">
+				</label>
+			</li>
+			<li>
+				<%= submit_tag('Save', :class => 'rgbabutton large blue') %>
+			</li>
 		</ul>
 	</div>
 <% end %>
