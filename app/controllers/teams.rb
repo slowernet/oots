@@ -15,7 +15,7 @@ get '/teams/:slug/edit' do
 	erb :'teams/edit'
 end
 
-get '/teams/:team_slug/in/:city_slug' do
+get '/:team_slug/in/:city_slug' do
 	@page_title = "Where to watch"
 	@team = Team.find_by_slug(params[:team_slug])
 	@city = City.find_by_slug(params[:city_slug])
