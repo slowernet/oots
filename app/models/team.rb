@@ -29,6 +29,10 @@ class Team
 		t.slug = t.name.dasherize
 	end
 
+	def definite_name
+		(definite_article ? 'the ' : '') + name
+	end
+	
 	def permalink
 		"/teams/#{slug}"
 	end
