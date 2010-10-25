@@ -1,3 +1,7 @@
+<% content_for :page_title do %>
+	<%= "#{@venue.name} at #{@venue.address} in #{@venue.city}" %>
+<% end %>
+
 <% content_for :page_body do %>
 	<h1><%= @venue.name %></h1>
 

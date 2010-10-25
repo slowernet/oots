@@ -40,5 +40,6 @@ end
 
 get "/venues" do
 	redirect '/' unless (request.cookies['admin'] == $SECRET)
-	request.cookies.inspect
+	@venues = Venue.all
+	erb :'venues/index'
 end

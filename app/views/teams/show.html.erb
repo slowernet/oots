@@ -1,3 +1,7 @@
+<% content_for :page_title do %>
+	<%= "#{@team.name} (#{@team.league})" %>
+<% end %>
+
 <% content_for :page_body do %>
 	<h1><%= @team.name %></h1>
 	<%= @team.league %>
