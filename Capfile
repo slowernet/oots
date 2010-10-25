@@ -6,7 +6,7 @@ set :application, "oots"
 set :scm, "git"
 set :repository, "git@github.com:slowernet/oots.git"
 set :branch, "master"
-set :deploy_to, "/home/curbed/applications/oots"
+set :deploy_to, "/home/eshepard/applications/oots"
 set :keep_releases, 2
 set :use_sudo, false
 set :user, "eshepard"
