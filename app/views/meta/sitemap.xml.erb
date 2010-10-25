@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	<url><loc><%= $BASE_URL %></loc></url>
+	<url>
+		<loc><%= $BASE_URL %></loc>
+		<changefreq>hourly</changefreq>
+	</url>
+	<url>
+		<loc><%= $BASE_URL %>/about</loc>
+		<changefreq>monthly</changefreq>
+	</url>
 	<% @cities.each do |c| %>
 		<% @teams.each do |t| %>
-			<url><loc><%= $BASE_URL %>/<%= t.slug %>/in/<%= c.slug %></loc></url>
+			<url>
+				<loc><%= $BASE_URL %>/<%= t.slug %>/in/<%= c.slug %></loc>
+				<changefreq>weekly</changefreq>
+			</url>
 		<% end %>
 	<% end %>
 	<% @teams.each do |t| %>
-		<url><loc><%= $BASE_URL %><%= t.permalink %></loc></url>
+		<url>
+			<loc><%= $BASE_URL %><%= t.permalink %></loc>
+			<changefreq>weekly</changefreq>
+		</url>
 	<% end %>
 	<% @venues.each do |t| %>
-		<url><loc><%= $BASE_URL %><%= t.permalink %></loc></url>
+		<url>
+			<loc><%= $BASE_URL %><%= t.permalink %></loc>
+			<changefreq>weekly</changefreq>
+		</url>
 	<% end %>
 </urlset>
