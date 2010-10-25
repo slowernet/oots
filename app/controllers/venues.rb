@@ -38,7 +38,7 @@ post '/venues' do
 	redirect venue.permalink
 end
 
-get "/#{$URL_SECRET}/venues" do
-	@venues = Venue.all
-	erb :'venues/index'
+get "/venues" do
+	redirect '/' unless (request.cookies['admin'] == $SECRET)
+	request.cookies.inspect
 end

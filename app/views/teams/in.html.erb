@@ -1,4 +1,3 @@
 <% content_for :page_body do %>
-	<h1><%= "#{@team.definite_name.titleize} in #{@city.name}, #{@city.statecode}" %></h1>
-	<%= @team.league %>
+	<h1><%= "#{@team.definite_name.titleize} (#{@team.league}) in #{@city.name}, #{@city.statecode}" %></h1>
 <% end %>

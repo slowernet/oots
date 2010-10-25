@@ -15,7 +15,8 @@ require 'mongo_mapper'
 # require 'open-uri'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
 
-$URL_SECRET = '2f0226e3ad7560db28c6e41c1d92e394'
+
+$SECRET = '2f0226e3ad7560db28c6e41c1d92e394'
 $BASE_URL = 'http://outoftownsports.com'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
@@ -78,4 +79,9 @@ get '/sitemap' do
 			erb :'meta/sitemap'
 		}
 	end
+end
+
+get "/#{$SECRET}" do
+	response.set_cookie('admin', $SECRET);
+	redirect '/'
 end

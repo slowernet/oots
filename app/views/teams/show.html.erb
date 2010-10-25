@@ -2,7 +2,9 @@
 	<h1><%= @team.name %></h1>
 	<%= @team.league %>
 	<br /><br /><br />
-	<% City.where().order(:population.desc).all.each do |c| %>
-		<div><a href="<%= "/#{@team.slug}/in/#{c.slug}" %>">Where to watch <%= @team.definite_name %> in <%= "#{c.name}, #{c.state}" %></a></div>
-	<% end %>
+	<ul>
+		<% City.where().order(:population.desc).all.each do |c| %>
+			<li><a href="<%= "/#{@team.slug}/in/#{c.slug}" %>">Where to watch <%= @team.definite_name %> in <%= "#{c.name}, #{c.state}" %></a></li>
+		<% end %>
+	</ul>
 <% end %>

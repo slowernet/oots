@@ -1,4 +1,5 @@
 get '/teams/new' do
+	redirect '/' unless (request.cookies['admin'] == $SECRET)
 	@form = { :method => 'post', :endpoint => '/teams' }
 	@team = Team.new
 	erb :'teams/edit'

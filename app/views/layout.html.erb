@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 	
 	<meta name="description" content="Out of Town Sports (OOTS) is a directory of places where you can watch your team in any city" />
-	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, directory" />
+	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, where to watch, nfl sunday ticket, mlb extra innings, nfl, mlb, nba, nhl, soccer, football, baseball, hockey, basketball, directory" />
 	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
 	<link rel="canonical" href="<%= "#{$BASE_URL}#{request.path_info}" %>" />
 	
@@ -49,8 +49,10 @@
 		<div id="page-footer">
 			<ul style="float: left; width: 204px;">
 				<li><a href="/">OOTS home</a></li>
-				<li><a href="/venues/new">New venue</a></li>
-				<!-- <li><a href="/teams/new">Add a team</a></li> -->
+				<% if (request.cookies['admin'] == $SECRET) %>
+					<li><a href="/venues/new">New venue</a></li>
+					<li><a href="/teams/new">Add a team</a></li>
+				<% end %>
 			</ul>
 			<ul style="float: left; width: 204px;">
 				<li><a href="/about">About</a></li>
