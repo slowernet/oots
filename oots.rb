@@ -10,10 +10,13 @@ require 'sinatra_more/markup_plugin' # http://github.com/nesquena/sinatra_more
 require 'sinatra_more/render_plugin'
 require 'sinatra/respond_to' # http://github.com/cehoffman/sinatra-respond_to
 require 'mongo_mapper'
-require 'bin'
-require 'joint'
+# require 'bin'
+# require 'joint'
 # require 'open-uri'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
+
+$URL_SECRET = '2f0226e3ad7560db28c6e41c1d92e394'
+$BASE_URL = 'http://outoftownsports.com'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
 
@@ -35,7 +38,7 @@ configure do
 	
 	# use Rack::GridFS, :hostname => 'localhost', :port => 27017, :database => dbname, :prefix => 'images/gridfs'
 	
-	CACHE = ActiveSupport::Cache.lookup_store(Bin::Store.new(MongoMapper.database['cache']))
+	# CACHE = ActiveSupport::Cache.lookup_store(Bin::Store.new(MongoMapper.database['cache']))
 
 	helpers AssetBundler::ViewHelper	# http://github.com/gbuesing/asset_bundler	
 end
@@ -60,4 +63,19 @@ get '/' do
 	# end
 	@teams = teams_for_select
 	erb :'venues/search'
+end
+
+get '/about' do
+	erb :'meta/about'
+end
+
+get '/sitemap' do
+	respond_to do |wants|
+		wants.xml {
+			@venues = Venue.all
+			@cities = City.all
+			@teams = Team.all
+			erb :'meta/sitemap'
+		}
+	end
 end

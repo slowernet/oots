@@ -1,0 +1,7 @@
+<% content_for :page_body do %>
+	<ul>
+		<% @venues.each do |v| %>
+			<li><a href="<%= v.permalink %>"><%= v.name %> in <%= v.city %>, <%= v.state %></li>
+		<% end %>
+	</ul>
+<% end %>

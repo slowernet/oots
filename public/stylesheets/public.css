@@ -38,6 +38,11 @@ h1 {
 	margin-bottom: 12pt;
 }
 
+h2 {
+	font-size: 16pt;
+	margin-bottom: 8pt;
+}
+
 h1, h2, h3, h4 {
 	font-weight: normal;
 }
@@ -45,6 +50,10 @@ h1, h2, h3, h4 {
 label {
 	font-size: 13px;
 	color: #888;
+}
+
+ul {
+	line-height: 1.5em;
 }
 
 /* http://net.tutsplus.com/tutorials/html-css-techniques/design-a-prettier-web-form-with-css-3/ */
@@ -91,8 +100,7 @@ input[type=text]:focus, textarea:focus {
 }
 
 #page-footer ul {
-	line-height: 1.5em;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 a.site-title img {

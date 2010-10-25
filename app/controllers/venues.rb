@@ -37,3 +37,8 @@ post '/venues' do
 	venue = Venue.create!(params[:venue])
 	redirect venue.permalink
 end
+
+get "/#{$URL_SECRET}/venues" do
+	@venues = Venue.all
+	erb :'venues/index'
+end
