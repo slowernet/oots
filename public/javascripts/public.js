@@ -93,6 +93,7 @@ $(document).ready(function() {
 
 			// check whether we have this venue already
 			$.getJSON('/venues/search.js', { foursquare_id: venue.id }, function(d) {
+				console.log(d);
 				if (d.length > 0) { document.location.href = '/venues/f/' + venue.id; }
 			});
 			
@@ -100,9 +101,10 @@ $(document).ready(function() {
 			$('#venue-edit').fadeIn();
 			
 			$('#venue_name').val(venue['name']);
-			$.each(['address', 'city', 'state', 'zip', 'crossstreet', 'phone', 'twitter', 'foursquare_id'], function(i, v) {
+			$.each(['address', 'city', 'state', 'zip', 'crossstreet', 'phone', 'twitter'], function(i, v) {
 				jQuery('#venue_' + v).val(venue[v]);
 			});
+			jQuery('#venue_foursquare_id').val(venue['id']);
 		}
 	});
 
