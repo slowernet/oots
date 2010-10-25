@@ -10,8 +10,8 @@ class Venue
 	include MongoMapper::Document
 	plugin MongoMapper::Plugins::IdentityMap
 	
-	key :name, String, :required => true, :index => true 
-	key :slug, String, :required => true, :index => true
+	key :name, String, :required => true
+	key :slug, String, :required => true, :unique => true
 	many :bonds
 	key :address, String
 	key :city, String
@@ -20,7 +20,7 @@ class Venue
 	key :crossstreet, String
 	key :latlon, Array
 	key :phone, String
-	key :foursquare_id, Integer
+	key :foursquare_id, Integer, :unique => true
 	key :url, String
 	key :twitter, String
 	timestamps!

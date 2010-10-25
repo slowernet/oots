@@ -1,8 +1,8 @@
 class City
 	include MongoMapper::Document
 	
-	key :name, String, :required => true, :index => true 
-	key :slug, String, :required => true, :index => true
+	key :name, String, :required => true
+	key :slug, String, :required => true, :unique => true
 	key :state, String
 	key :statecode, String
 	key :statecode, String

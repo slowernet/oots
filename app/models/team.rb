@@ -2,8 +2,8 @@ class Team
 	include MongoMapper::Document
 	plugin MongoMapper::Plugins::IdentityMap
 	
-	key :name, String, :required => true, :index => true 
-	key :slug, String, :required => true, :index => true
+	key :name, String, :required => true
+	key :slug, String, :required => true, :unique => true
 	key :definite_article, Boolean
 	key :sport, String
 	key :league, String
