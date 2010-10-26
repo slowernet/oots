@@ -47,20 +47,20 @@
 			<%= yield_content :page_body %>
 		</div>
 		<div id="page-footer">
-			<ul style="float: left; width: 204px;">
+			<ul>
 				<li><a href="/">OOTS home</a></li>
 				<% if (request.cookies['admin'] == $SECRET) %>
 					<li><a href="/venues/new">New venue</a></li>
 					<li><a href="/teams/new">Add a team</a></li>
 				<% end %>
 			</ul>
-			<ul style="float: left; width: 204px;">
+			<ul>
 				<li><a href="/about">About</a></li>
 			</ul>
-			<ul style="float: left; width: 204px;">
-				<li><a href="http://twitter.com/outoftownsports">Twitter</a></li>
+			<ul>
+				<li><a href="http://twitter.com/outoftownsports" target="_blank"><img src="/images/twitter-icon.png" height="20" width="20" border="0"></a></li>
 			</ul>
-			<ul style="float: left; width: 204px;">
+			<ul>
 				<li><a href="http://s46.sitemeter.com/stats.asp?site=s46outoftownsports" target="_top"><img src="http://s46.sitemeter.com/meter.asp?site=s46outoftownsports&1103616580" alt="Site Meter" border="0" height="20" width="20"></a></li>
 			</ul>
 			<div style="clear: both;"> </div>
@@ -72,7 +72,8 @@
 		"/javascripts/jquery.cookies.js",
 		"/javascripts/underscore.js",
 		"/javascripts/public.js",
-		:cache => "/javascripts/bundle.js" 
+		:cache => "/javascripts/bundle.js",
+		:compress => true
 	%>
 	
 	<%= yield_content :page_end %>

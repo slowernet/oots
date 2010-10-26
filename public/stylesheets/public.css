@@ -101,6 +101,8 @@ input[type=text]:focus, textarea:focus {
 
 #page-footer ul {
 	font-size: 13px;
+	float: left;
+	width: 204px;
 }
 
 a.site-title img {
