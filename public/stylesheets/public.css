@@ -49,7 +49,7 @@ h1, h2, h3, h4 {
 
 label {
 	font-size: 13px;
-	color: #888;
+	color: #555;
 }
 
 ul {
@@ -100,7 +100,7 @@ input[type=text]:focus, textarea:focus {
 }
 
 #page-footer ul {
-	font-size: 13px;
+	font-size: 14px;
 	float: left;
 	width: 204px;
 }
@@ -130,6 +130,7 @@ a.site-title img {
 /*	border: 1px solid #eee;*/
 }
 
+#bond-note,
 #bond-team-name {
 	width: 300px;
 	font-size: 20px; 	

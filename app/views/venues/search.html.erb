@@ -1,6 +1,6 @@
 <% content_for :page_body do %>
 	<div id="search-form" style="text-align: center;">
 		I'm in <span id="search-city"><img  src="/images/spinner.gif" style="padding: 0 3px;" /></span> 
-		and I want to watch <span id="search-team-definite-article">the </span><input id="search-team" type="text" placeholder="team name" data-teams='<%= @teams.to_json %>'>
+		and I want to watch <span id="search-team-definite-article">the </span><input id="search-team" type="text" placeholder="team name" autofocus data-teams='<%= @teams.to_json %>'>
 	</div>
 <% end %>

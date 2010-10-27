@@ -59,6 +59,11 @@
 			</ul>
 			<ul>
 				<li><a href="http://twitter.com/outoftownsports" target="_blank"><img src="/images/twitter-icon.png" height="20" width="20" border="0"></a></li>
+				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
+					<div id="mailing-list-signup" style="display: none;">
+						<%= partial :'meta/mailinglist' %>
+					</div>
+				</li>
 			</ul>
 			<ul>
 				<li><a href="http://s46.sitemeter.com/stats.asp?site=s46outoftownsports" target="_top"><img src="http://s46.sitemeter.com/meter.asp?site=s46outoftownsports&1103616580" alt="Site Meter" border="0" height="20" width="20"></a></li>

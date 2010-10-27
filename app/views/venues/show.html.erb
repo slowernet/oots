@@ -8,33 +8,33 @@
 	<ul style="margin: 1em 0;">
 		<li><%= @venue.address %>, <%= @venue.city %></li>
 		<% unless @venue.foursquare_id.blank? %>
-			<li><a href="http://foursquare.com/venue/<%= @venue.foursquare_id %>" target="_blank"><img src="/images/foursquare-icon.png" height="20" width="20" border="0"> foursquare</a></li>
+			<li><a href="http://foursquare.com/venue/<%= @venue.foursquare_id %>" target="_blank"><img src="/images/foursquare-icon.png" height="20" width="20" border="0" style="vertical-align: text-top;"> foursquare</a></li>
 		<% end %>
 		
 	</ul>
 	
 	<div>
-		<a href='#' id="open-add-bond">&rarr; Associate a team with this venue?</a>
-		<ul id="add-bond" style="display: block;">
+		<a href='#' id="open-add-bond" onclick="$('#add-bond').toggle(); return false;">&rarr; Associate a team with this venue?</a>
+		<form id="add-bond" style="display: none;" method="post" action="<%= @venue.permalink %>/bonds">
 			<li>
 				<label>Team<br/>
 					<input type="text" name="team-name" id="bond-team-name" data-teams='<%= @teams.to_json %>'>
 				</label>
 			</li>
 			<li>
-				<label>Game is on</label>
-				<label><%= radio_button_tag(:strength, :value => '1') %> Always</label>
-				<label><%= radio_button_tag(:strength, :value => '2') %> Often</label>
+				<label>Game is on</label><br />
+				<label><%= radio_button_tag(:strength, :value => '1') %> Always</label><br />
+				<label><%= radio_button_tag(:strength, :value => '2') %> Often</label><br />
 				<label><%= radio_button_tag(:strength, :value => '3') %> Sometimes &ndash; check first</label>
 			</li>
 			<li>
 				<label>Note<br/>
-					<input type="text" name="note">
+					<input type="text" name="note" id="bond-note">
 				</label>
 			</li>
 			<li>
 				<%= submit_tag('Save', :class => 'rgbabutton large blue') %>
 			</li>
-		</ul>
+		</form>
 	</div>
 <% end %>

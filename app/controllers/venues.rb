@@ -10,8 +10,9 @@ get '/venues/search' do
 		wants.js {
 			if params[:foursquare_id]
 				Venue.where(:foursquare_id => params[:foursquare_id].to_i).all.to_json
+			else
+				Venue.where("bonds.team_id" => params[:team_id]).where(:latlon => {'$near' => [ params[:lat].to_f, params[:lon].to_f ]}).limit(25).all.to_json
 			end
-			# Venue.where().sort($near : [50,50])
 		}
 	end
 end
@@ -42,4 +43,10 @@ get "/venues" do
 	redirect '/' unless (request.cookies['admin'] == $SECRET)
 	@venues = Venue.all
 	erb :'venues/index'
+end
+
+post '/venues/:slug/bonds' do
+	params.inspect
+#	@venue = Venue.find_by_slug(params[:slug])
+#	@venue.bonds << Bond.new({params[:bond]})
 end
