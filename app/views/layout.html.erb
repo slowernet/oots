@@ -23,13 +23,11 @@
 </head>
 
 <body>
-	<div id="page-container">
-		<div id="page-header">
-			<a href="/" class="site-title"><img src="/images/oots-title.png" height="44" width="655" title="Out of Town Sports" border="0"></a>
-		</div>
+	<div id="page-header">
+		<a href="/" class="site-title"><img src="/images/oots-title.png" height="44" width="655" title="Out of Town Sports" border="0"></a>
 	</div>
 	
-	<div id="ad-bar" style="height: 110px; background-color: #eef; margin-bottom: 22px; border-top: 1px solid #ccd;  border-bottom: 1px solid #ccd;">
+	<div id="ad-bar" style="">
 		<div style="width: 728px; margin: 10px auto;">
 			<script type="text/javascript">
 				google_ad_client = "pub-0057027191769219";
@@ -38,15 +36,19 @@
 				google_ad_width = 728;
 				google_ad_height = 90;
 			</script>
-			<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<!--			<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script> -->
 		</div>
 	</div>
 
-	<div id="page-container">
-		<div id="page-body">
-			<%= yield_content :page_body %>
-		</div>
-		<div id="page-footer">
+	<div id="page-body">
+		<%= yield_content :page_body %>
+	</div>
+
+	<%= # partial :'meta/faq' if (request.path_info == '/') 
+	%>
+	
+	<div id="page-footer">
+		<div>
 			<ul>
 				<li><a href="/">OOTS home</a></li>
 				<% if (request.cookies['admin'] == $SECRET) %>
@@ -56,14 +58,14 @@
 			</ul>
 			<ul>
 				<li><a href="/about">About</a></li>
-			</ul>
-			<ul>
-				<li><a href="http://twitter.com/outoftownsports" target="_blank"><img src="/images/twitter-icon.png" height="20" width="20" border="0"></a></li>
 				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
 					<div id="mailing-list-signup" style="display: none;">
 						<%= partial :'meta/mailinglist' %>
 					</div>
 				</li>
+			</ul>
+			<ul>
+				<li><a href="http://twitter.com/outoftownsports" target="_blank"><img src="/images/twitter-icon.png" height="20" width="20" border="0"></a></li>
 			</ul>
 			<ul>
 				<li><a href="http://s46.sitemeter.com/stats.asp?site=s46outoftownsports" target="_top"><img src="http://s46.sitemeter.com/meter.asp?site=s46outoftownsports&1103616580" alt="Site Meter" border="0" height="20" width="20"></a></li>
@@ -75,13 +77,15 @@
 	<%= javascript_include_tag "/javascripts/jquery.js",
 		"/javascripts/jquery-ui-1.8.5.custom.min.js",
 		"/javascripts/jquery.cookies.js",
+		"/javascripts/jquery.elastic.js",
 		"/javascripts/underscore.js",
 		"/javascripts/public.js",
 		:cache => "/javascripts/bundle.js",
 		:compress => true
 	%>
 	
-	<%= yield_content :page_end %>
+	<%= # yield_content :page_end 
+	%>
 	
 	<script type="text/javascript" charset="utf-8">
 		var _gaq = _gaq || [];

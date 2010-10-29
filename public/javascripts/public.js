@@ -1,6 +1,23 @@
 $(document).ready(function() {
 	_.templateSettings = { interpolate : /\#\{(.+?)\}/g };	// #{} style
 
+	// ul.select /////////////////////////////////////////
+
+	// open on click selected, close on reclick
+	$('ul.select li.selected a').live('click', function(e) {
+		e.preventDefault();	
+		$(this).parents('ul.select').toggleClass('open');
+	});
+	// close on click off
+	$(document).click(function(e) {
+		if(!$(e.target).is('ul.select li a')) $('ul.select').removeClass('open');
+	});
+	// update selection
+	$('ul.select.open li a').live('click', function(e) {
+		e.preventDefault();	
+		$(this).parent('li').addClass('selected').siblings('li').removeClass('selected').parents('ul.select').removeClass('open').data('strength', $(this).html());
+	});
+	
 	// venue search /////////////////////////////////////////
 
 	if ((c = $.cookies.get('search-city')) && c.lat) {
@@ -110,6 +127,13 @@ $(document).ready(function() {
 
 	// bond edit /////////////////////////////////////////
 
+	$('#bond-note').elastic();
+	$('#open-add-bond').click(function() {
+		$(this).hide();
+		$('#add-bond').toggle(); 
+		return false;
+	});
+	
 	$('#bond-team-name').autocomplete({
 		source: function(r, cb) {
 			var teams = _.select($('#bond-team-name').data('teams'), function(team) {

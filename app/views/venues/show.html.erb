@@ -7,34 +7,38 @@
 
 	<ul style="margin: 1em 0;">
 		<li><%= @venue.address %>, <%= @venue.city %></li>
+		<li><%= @venue.phone %></li>
 		<% unless @venue.foursquare_id.blank? %>
 			<li><a href="http://foursquare.com/venue/<%= @venue.foursquare_id %>" target="_blank"><img src="/images/foursquare-icon.png" height="20" width="20" border="0" style="vertical-align: text-top;"> foursquare</a></li>
 		<% end %>
-		
 	</ul>
 	
-	<div>
-		<a href='#' id="open-add-bond" onclick="$('#add-bond').toggle(); return false;">&rarr; Associate a team with this venue?</a>
-		<form id="add-bond" style="display: none;" method="post" action="<%= @venue.permalink %>/bonds">
-			<li>
-				<label>Team<br/>
-					<input type="text" name="team-name" id="bond-team-name" data-teams='<%= @teams.to_json %>'>
-				</label>
-			</li>
-			<li>
-				<label>Game is on</label><br />
-				<label><%= radio_button_tag(:strength, :value => '1') %> Always</label><br />
-				<label><%= radio_button_tag(:strength, :value => '2') %> Often</label><br />
-				<label><%= radio_button_tag(:strength, :value => '3') %> Sometimes &ndash; check first</label>
-			</li>
-			<li>
-				<label>Note<br/>
-					<input type="text" name="note" id="bond-note">
-				</label>
-			</li>
-			<li>
-				<%= submit_tag('Save', :class => 'rgbabutton large blue') %>
-			</li>
-		</form>
-	</div>
+	<!-- <h3>Teams</h3> -->
+	<ul>
+	<% if @venue.bonds.blank? %>
+		<li><a href='#' id="open-add-bond">&rarr; No teams. Add one?</a></li>
+	<% else %>
+		<li><a href='#' id="open-add-bond">&rarr; Associate another team with this venue?</a></li>
+	<% end %>
+	</ul>
+	
+	<form id="add-bond" style="display: none;" method="post" action="<%= @venue.permalink %>/bonds">
+		<input type="text" name="bond[team_name]" id="bond-team-name" placeholder="Team name" data-teams='<%= @teams.to_json %>'>
+
+		games are
+		
+		<input type="hidden" name="bond[strength]" value="">
+		<ul class="select" style="display: inline-block;">
+			<li class="selected"><a href="#">always</a></li>
+			<li class=""><a href="#">usually</a></li>
+			<li class=""><a href="#">sometimes</a></li>
+		</ul>
+		
+		<div style="padding-left: 110px; display: inline-block;">shown here.</div>
+		
+		<textarea id="bond-note" name="bond[note]" placeholder="Additional info..."></textarea>
+		<br />
+
+		<%= submit_tag('Save', :class => 'rgbabutton large blue') %>
+	</form>
 <% end %>
