@@ -1,22 +1,5 @@
 $(document).ready(function() {
 	_.templateSettings = { interpolate : /\#\{(.+?)\}/g };	// #{} style
-
-	// ul.select /////////////////////////////////////////
-
-	// open on click selected, close on reclick
-	$('ul.select li.selected a').live('click', function(e) {
-		e.preventDefault();	
-		$(this).parents('ul.select').toggleClass('open');
-	});
-	// close on click off
-	$(document).click(function(e) {
-		if(!$(e.target).is('ul.select li a')) $('ul.select').removeClass('open');
-	});
-	// update selection
-	$('ul.select.open li a').live('click', function(e) {
-		e.preventDefault();	
-		$(this).parent('li').addClass('selected').siblings('li').removeClass('selected').parents('ul.select').removeClass('open').data('strength', $(this).html());
-	});
 	
 	// venue search /////////////////////////////////////////
 
@@ -125,9 +108,46 @@ $(document).ready(function() {
 		}
 	});
 
+	// ul.select /////////////////////////////////////////
+
+	// open on click selected, close on reclick
+	$('ul.select li.selected a').live('click', function(e) {
+		e.preventDefault();	
+		$(this).parents('ul.select').toggleClass('open');
+	});
+	// close on click off
+	$(document).click(function(e) {
+		if(!$(e.target).is('ul.select li a')) $('ul.select').removeClass('open');
+	});
+	// update selection
+	$('ul.select.open li a').live('click', function(e) {
+		e.preventDefault();	
+		var $ul = $(this).parents('ul.select');
+		$(this).parent('li').addClass('selected').siblings('li').removeClass('selected').parents('ul.select').removeClass('open');
+		$ul.data($ul.attr('name'), $ul.children('li.selected a').html());
+console.log($ul.data());
+	});
+	
+	$('ul.select li.selected').each(function() {
+		var $that = $(this);
+		$that.parents('ul.select').data($that.attr('name'), $that.children('a').html());
+console.log($that.parents('ul.select'), $that.children('a').html(), $that.parents('ul.select').data());
+		// $(this).data($(this).attr('name'), $(this).children('li.selected a').html()) 
+	});
+
 	// bond edit /////////////////////////////////////////
 
 	$('#bond-note').elastic();
+	
+	$('#add-bond').submit(function() {
+		var $that = $(this);
+		$(this).children('ul.select').each(function(us) {
+console.log($(this).data());
+			$that.append("<input type='hidden' name='" + $(this).children('ul.select').name + "' value='" + $(this).data('strength') + "'>"); 
+		});
+		return false;
+	});
+	
 	$('#open-add-bond').click(function() {
 		$(this).hide();
 		$('#add-bond').toggle(); 

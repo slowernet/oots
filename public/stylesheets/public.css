@@ -48,8 +48,7 @@ ul {
 /* http://net.tutsplus.com/tutorials/html-css-techniques/design-a-prettier-web-form-with-css-3/ */
 
 input[type=text], 
-textarea,
-ul.select li a {
+textarea {
 	font-family: 'CalibriRegular';
 	padding: 5px 5px 0px 5px;
 	border: solid 1px #e4e4e4;
@@ -89,6 +88,7 @@ ul.select li a {
 /*	border-color: #CCC;*/
 /*	border-style: solid;*/
 /*	border-width: 1px;*/
+	border: solid 1px #e4e4e4;
 	display: block;
 	padding: 6px 9px 7px;
 	line-height: 1em;
@@ -125,7 +125,8 @@ ul.select.open li a {
 }
 
 ul.select li a:hover {
-	background-color: #f4f4ff;
+	background-color: #33d;
+	color: white;
 	text-decoration: none;
 }
 
@@ -207,7 +208,7 @@ a.site-title img {
 /*	margin: 60px 0px 0px 76px;*/
 	margin-top: 2px;
 	position: absolute;
-	width: 105px;
+	width: 110px;
 	z-index: 999;
 }
 

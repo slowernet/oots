@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 	
-	<meta name="description" content="Out of Town Sports (OOTS) is a directory of places where you can watch your team in any city" />
+	<meta name="description" content="Out of Town Sports (OOTS) is a directory of places where you can watch out-of-town sports teams in any city" />
 	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, where to watch, nfl sunday ticket, mlb extra innings, nfl, mlb, nba, nhl, soccer, football, baseball, hockey, basketball, directory" />
 	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
 	<link rel="canonical" href="<%= "#{$BASE_URL}#{request.path_info}" %>" />
@@ -25,6 +25,7 @@
 <body>
 	<div id="page-header">
 		<a href="/" class="site-title"><img src="/images/oots-title.png" height="44" width="655" title="Out of Town Sports" border="0"></a>
+		<em style="font-size: 12px; display: block; text-align: right; width: 655px; margin: 3px auto; color: #777;">Doesn't-work-yet version</em>
 	</div>
 	
 	<div id="ad-bar" style="">
@@ -44,15 +45,13 @@
 		<%= yield_content :page_body %>
 	</div>
 
-	<%= # partial :'meta/faq' if (request.path_info == '/') 
-	%>
-	
 	<div id="page-footer">
 		<div>
 			<ul>
 				<li><a href="/">OOTS home</a></li>
 				<% if (request.cookies['admin'] == $SECRET) %>
 					<li><a href="/venues/new">New venue</a></li>
+					<li><a href="/venues">List venues</a></li>
 					<li><a href="/teams/new">Add a team</a></li>
 				<% end %>
 			</ul>
@@ -82,9 +81,6 @@
 		"/javascripts/public.js",
 		:cache => "/javascripts/bundle.js",
 		:compress => true
-	%>
-	
-	<%= # yield_content :page_end 
 	%>
 	
 	<script type="text/javascript" charset="utf-8">
