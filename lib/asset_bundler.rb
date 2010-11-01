@@ -1,6 +1,8 @@
 require 'asset_timestamps_cache'
 require 'fileutils'
 require 'httparty'
+require 'cssmin'
+
 module AssetBundler
 
 	# Mix this in to view context for convenient access
@@ -60,18 +62,22 @@ module AssetBundler
 	def self.write_asset_file_contents(joined_asset_path, asset_paths, compress)
 		FileUtils.mkdir_p(File.dirname(joined_asset_path))
 		contents = join_asset_file_contents(asset_paths)
-		File.open(joined_asset_path, "w+") { |cache| cache.write(contents) }
 
 		# modified by ES
-		if compress && asset_paths.first.match(/\.js$/)
-			contents = HTTParty.post('http://closure-compiler.appspot.com/compile', :body => { 
-				:js_code => contents, 
-				:compilation_level => 'SIMPLE_OPTIMIZATIONS', 
-				:output_format => 'text',
-				:output_info => 'compiled_code'
-			})
-			File.open(joined_asset_path, "w+") { |cache| cache.write(contents) }
+		if compress
+			if asset_paths.first.match(/\.js$/)
+				contents = HTTParty.post('http://closure-compiler.appspot.com/compile', :body => { 
+					:js_code => contents, 
+					:compilation_level => 'SIMPLE_OPTIMIZATIONS', 
+					:output_format => 'text',
+					:output_info => 'compiled_code'
+				})
+			elsif asset_paths.first.match(/\.css$/)
+				contents = CSSMin.minify(contents)
+			end
 		end
+		
+		File.open(joined_asset_path, "w+") { |cache| cache.write(contents) }
 
 		# Set mtime to the latest of the combined files to allow for
 		# consistent ETag without a shared filesystem.

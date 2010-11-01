@@ -17,7 +17,9 @@
 	<%= stylesheet_link_tag "/stylesheets/reset.css", 
 		"/stylesheets/public.css", 
 		"/stylesheets/custom-theme/jquery-ui-1.8.5.custom.css", 
-		:cache => "/stylesheets/bundle.css" %>
+		:cache => "/stylesheets/bundle.css",
+		:compress => true
+	%>
 
 	<%= yield_content :page_head %>
 </head>
