@@ -16,13 +16,13 @@
 	<!-- <h3>Teams</h3> -->
 	<ul>
 	<% if @venue.bonds.blank? %>
-		<li><a href='#' id="open-add-bond">&rarr; No teams. Add one?</a></li>
+		<!-- <li><a href='#' id="open-add-bond">&rarr; No teams. Add one?</a></li> -->
 	<% else %>
-		<li><a href='#' id="open-add-bond">&rarr; Associate another team with this venue?</a></li>
+		<!-- <li><a href='#' id="open-add-bond">&rarr; Associate another team with this venue?</a></li> -->
 	<% end %>
 	</ul>
 	
-	<form id="add-bond" style="display: none;" method="post" action="<%= @venue.permalink %>/bonds">
+	<form id="add-bond" style="" method="post" action="<%= @venue.permalink %>/bonds">
 		<input type="text" name="bond[team_name]" id="bond-team-name" placeholder="Team name" data-teams='<%= @teams.to_json %>'>
 
 		games are
