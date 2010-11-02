@@ -5,7 +5,6 @@ class City
 	key :slug, String, :required => true, :unique => true
 	key :state, String
 	key :statecode, String
-	key :statecode, String
 	key :country, String
 	key :countrycode, String
 	key :radius, Integer

@@ -52,7 +52,7 @@ $(document).ready(function() {
 			url: "http://query.yahooapis.com/v1/public/yql",
 			dataType: "jsonp",
 			data: {
-				q: "select * from geo.placefinder where text='" + $(this).val() + "'",
+				q: "select * from geo.placefinder where text='" + $that.val() + "'",
 				format: 'json',
 				callback: '?'
 			},

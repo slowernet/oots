@@ -71,3 +71,18 @@
 		</ul>
 	<% end %>
 <% end %>
+
+<% content_for :page_end do %>
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		try {
+			var qs = _(location.search.substring(1).split('&')).chain()
+				.map(function(p) { return p.split('='); })
+				.map(function(p) { return [ p[0], decodeURIComponent(p[1].replace(/\+/g, '%20')) ] })
+				.reduce(function(acc, v) { acc[v[0]] = v[1]; return acc; }, {})
+				.value();
+			$('#venue-search-location').val(qs.location).change();
+		} catch(e) {}
+	});
+	</script>
+<% end %>
