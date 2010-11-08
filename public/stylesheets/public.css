@@ -50,16 +50,16 @@ ul {
 input[type=text], 
 textarea {
 	font-family: 'CalibriRegular';
-	padding: 5px 5px 0px 5px;
-	border: solid 1px #e4e4e4;
+	padding: 4px 5px 0px 5px;
+/*	border: solid 1px #e4e4e4;*/
 	outline: 0;
 /*	background: #FFFFFF url('bg_form.png') left top repeat-x;*/
-	background: -webkit-gradient(linear, left top, left 25, from(#fff), color-stop(4%, #fafafa), to(#fff));
+/*	background: -webkit-gradient(linear, left top, left 25, from(#fff), color-stop(4%, #fafafa), to(#fff));
 	background: -moz-linear-gradient(top, #FFFFFF, #fafafa 1px, #fff 25px);
 	box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 	-moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 5px;
 	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 5px;
-/*	border-radius: 6px; 
+*//*	border-radius: 6px; 
 	-moz-border-radius: 6px; 
 	-webkit-border-radius: 6px;
 */}

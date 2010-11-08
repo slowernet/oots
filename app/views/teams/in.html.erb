@@ -6,7 +6,7 @@
 	<h1><%= "#{@team.definite_name.titleize} (#{@team.league}) in #{@city.name}, #{@city.statecode}" %></h1>
 	
 	<% if @venues.blank? %>
-		We don't know of anyplace to watch <%= @team.definite_name.titleize %> in <%= @city.name %>. <a href="/venues/new?location=<%= URI.escape "#{@city.name}, #{@city.statecode}" %>&lat=<%= @city.latlon[0] %>&lon=<%= @city.latlon[1] %>">Add one?</a>
+		We don't know of anyplace to watch <%= @team.definite_name %> in <%= @city.name %>. <a href="/venues/new?location=<%= URI.escape "#{@city.name}, #{@city.statecode}" %>&team=<%= @team.slug %>">Add one?</a>
 	<% else %>
 	<% end %>
 <% end %>

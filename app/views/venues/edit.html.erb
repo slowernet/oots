@@ -1,6 +1,6 @@
 <% content_for :page_body do %>
 
-	<h1><%= @venue.new? ? "New" : "Update" %>  venue</h1>
+	<h1><%= @venue.new? ? "New" : "Update" %>  venue <%= "for #{@team.definite_name}" unless @team.blank? %></h1>
 
 	<ul class="form" id="venue-pre-edit-search">
 		<li>
@@ -78,8 +78,7 @@
 		try {
 			var qs = _(location.search.substring(1).split('&')).chain()
 				.map(function(p) { return p.split('='); })
-				.map(function(p) { return [ p[0], decodeURIComponent(p[1].replace(/\+/g, '%20')) ] })
-				.reduce(function(acc, v) { acc[v[0]] = v[1]; return acc; }, {})
+				.reduce(function(acc, v) { acc[v[0]] = decodeURIComponent(v[1].replace(/\+/g, '%20')); return acc; }, {})
 				.value();
 			$('#venue-search-location').val(qs.location).change();
 		} catch(e) {}

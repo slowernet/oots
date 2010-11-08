@@ -40,7 +40,7 @@ $(document).ready(function() {
 				}				
 			});
 		}, function(m) {
-			console.log(m);
+			// console.log(m);
 		});
 	}
 
@@ -93,7 +93,7 @@ $(document).ready(function() {
 
 			// check whether we have this venue already
 			$.getJSON('/venues/search.js', { foursquare_id: venue.id }, function(d) {
-				console.log(d);
+				// console.log(d);
 				if (d.length > 0) { document.location.href = '/venues/f/' + venue.id; }
 			});
 			
@@ -125,13 +125,13 @@ $(document).ready(function() {
 		var $ul = $(this).parents('ul.select');
 		$(this).parent('li').addClass('selected').siblings('li').removeClass('selected').parents('ul.select').removeClass('open');
 		$ul.data($ul.attr('name'), $ul.children('li.selected a').html());
-console.log($ul.data());
+// console.log($ul.data());
 	});
 	
 	$('ul.select li.selected').each(function() {
 		var $that = $(this);
 		$that.parents('ul.select').data($that.attr('name'), $that.children('a').html());
-console.log($that.parents('ul.select'), $that.children('a').html(), $that.parents('ul.select').data());
+// console.log($that.parents('ul.select'), $that.children('a').html(), $that.parents('ul.select').data());
 		// $(this).data($(this).attr('name'), $(this).children('li.selected a').html()) 
 	});
 
@@ -142,7 +142,7 @@ console.log($that.parents('ul.select'), $that.children('a').html(), $that.parent
 	$('#add-bond').submit(function() {
 		var $that = $(this);
 		$(this).children('ul.select').each(function(us) {
-console.log($(this).data());
+// console.log($(this).data());
 			$that.append("<input type='hidden' name='" + $(this).children('ul.select').name + "' value='" + $(this).data('strength') + "'>"); 
 		});
 		return false;

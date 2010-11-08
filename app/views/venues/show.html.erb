@@ -7,7 +7,7 @@
 
 	<ul style="margin: 1em 0;">
 		<li><%= @venue.address %>, <%= @venue.city %></li>
-		<li><%= @venue.phone %></li>
+		<li><a href="tel:+1<%= @venue.phone.gsub(/\D/,'') %>"><%= format_phone @venue.phone %></a></li>
 		<% unless @venue.foursquare_id.blank? %>
 			<li><a href="http://foursquare.com/venue/<%= @venue.foursquare_id %>" target="_blank"><img src="/images/foursquare-icon.png" height="20" width="20" border="0" style="vertical-align: text-top;"> foursquare</a></li>
 		<% end %>
@@ -22,7 +22,7 @@
 	<% end %>
 	</ul>
 	
-	<form id="add-bond" style="" method="post" action="<%= @venue.permalink %>/bonds">
+	<% form_for(Bond.new, "#{@venue.permalink}/bonds", :method => 'post', :id => 'add-bond') do |f| %>
 		<input type="text" name="bond[team_name]" id="bond-team-name" placeholder="Team name" data-teams='<%= @teams.to_json %>'>
 
 		games are
@@ -39,5 +39,5 @@
 		<br />
 
 		<%= submit_tag('Save', :class => 'rgbabutton large blue') %>
-	</form>
+	<% end %>
 <% end %>

@@ -50,6 +50,11 @@ Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |fil
 
 #####################
 
+def format_phone(p)
+	p.gsub!(/\D/,'')
+	"#{p[0..2]} #{p[3..5]} #{p[6..9]}"
+end
+
 def teams_for_select
 	Team.all(:order => 'name').map { |t| { 
 		:id => t.id, 

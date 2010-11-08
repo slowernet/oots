@@ -1,6 +1,7 @@
 get '/venues/new' do
 	@form = { :method => 'post', :endpoint => '/venues' }
 	@venue = Venue.new
+	@team = Team.find_by_slug(params[:team]) if params[:team]
 	erb :'venues/edit'
 end
 
@@ -46,7 +47,7 @@ get "/venues" do
 end
 
 post '/venues/:slug/bonds' do
-	params.inspect
-#	@venue = Venue.find_by_slug(params[:slug])
-#	@venue.bonds << Bond.new({params[:bond]})
+	# params.inspect
+	@venue = Venue.find_by_slug(params[:slug])
+	# @venue.bonds << Bond.new({params[:bond]})
 end
