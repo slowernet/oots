@@ -236,6 +236,11 @@ a.site-title img {
 	margin-bottom: 12pt;
 }
 
+#mc_embed_signup input[type=text] {
+	font-family: 'CalibriRegular';
+	font-size: 16px;
+}
+
 /* http://www.zurb.com/blog_uploads/0000/0617/buttons-03.html */
 
 .rgbabutton, .rgbabutton:visited {
