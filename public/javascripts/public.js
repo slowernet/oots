@@ -26,28 +26,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	if ($('#search-city').length && navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			var c = position.coords;
-			$.ajax({
-				url: "http://query.yahooapis.com/v1/public/yql",
-				dataType: "jsonp",
-				data: {
-					q: "select * from geo.placefinder where text='" + c.latitude + " " + c.longitude + "' and gflags='R'",
-					format: 'json',
-					callback: '?'
-				},
-				success: function(d) {
-					var r = d.query.results['Result'];
-					$.cookies.set('search-city', { city: r.city, lat: c.latitude, lon: c.longitude });
-					$('#search-city').html(r.city).removeClass('preliminary').closest('#search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);
-				}				
-			});
-		}, function(m) {
-			// console.log(m);
-		});
-	}
-
 	// venue edit /////////////////////////////////////////
 	
 	$('#venue-search-location').change(function() {
@@ -168,4 +146,27 @@ $(document).ready(function() {
 		select: function(e, ui) {
 		}		
 	});
+});
+
+$(window).load(function() {
+		if ($('#search-city').length && navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var c = position.coords;
+			$.getJSON(
+				'http://query.yahooapis.com/v1/public/yql',
+				{
+					q: "select * from geo.placefinder where text='" + c.latitude + " " + c.longitude + "' and gflags='R'",
+					format: 'json'
+				}, function(d) {
+					var r = d.query.results['Result'];
+					$.cookies.set('search-city', { city: r.city, lat: c.latitude, lon: c.longitude });
+					$('#search-city').html(r.city).removeClass('preliminary').closest('#search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);					
+				}	
+			);
+		}, function(m) {
+			console.log(m);
+			var c = $.cookies.get('search-city');
+			$('#search-city').html(c.city).removeClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
+		});
+	}
 });
