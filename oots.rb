@@ -16,8 +16,11 @@ require 'mongo_mapper'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
 
 
-$SECRET = '2f0226e3ad7560db28c6e41c1d92e394'
 $BASE_URL = 'http://outoftownsports.com'
+$SECRET = '2f0226e3ad7560db28c6e41c1d92e394'
+
+# http://ipinfodb.com/ip_location_api.php
+# $IPINFODB_API_KEY = '0c3dfc109da55ad6220ba55e2baaf44af5da8469ee19bb4be59820917acf8fa1'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
 

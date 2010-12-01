@@ -3,4 +3,6 @@
 
 # OOTS
 
+http://ipinfodb.com/ip_location_api.php
+
 http://developer.yahoo.com/geo/placefinder/guide/requests.html

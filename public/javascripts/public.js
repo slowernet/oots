@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	_.templateSettings = { interpolate : /\#\{(.+?)\}/g };	// #{} style
 	
+	$('img.defer').each(function() {
+		this.src = $(this).data('src');
+	});
+	
 	// venue search /////////////////////////////////////////
 
 	if ((c = $.cookies.get('search-city')) && c.lat) {
