@@ -133,11 +133,23 @@ ul.select li a:hover {
 
 /************/
 
+#spinner {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	height: 24px;
+	width: 24px;
+	background: white url(/images/spinner.gif) no-repeat 50% 50%;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px; 
+}
+
 #page-header {
-	width: 829px;
-	margin: 0 auto;
-	padding: 19px 0;
+  background-color: black;
+	padding: 15px 0;
 	text-align: center;
+	margin-bottom: 15px;
 }
 
 #ad-bar {
@@ -155,9 +167,9 @@ ul.select li a:hover {
 }
 
 #page-footer {
-	border-top: 1px solid #ddd;
-	background-color: #eee;
-	padding: 35px 0px;
+/*  border-top: 1px solid #ddd;*/
+/*  background-color: #eee;*/
+	padding: 15px 0px;
 }
 
 #page-footer>div {

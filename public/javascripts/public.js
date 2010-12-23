@@ -149,7 +149,8 @@ $(document).ready(function() {
 });
 
 $(window).load(function() {
-		if ($('#search-city').length && navigator.geolocation) {
+	if ($('#search-city').length && navigator.geolocation) {
+		$('#spinner').show();
 		navigator.geolocation.getCurrentPosition(function(position) {
 			var c = position.coords;
 			$.getJSON(
@@ -161,12 +162,16 @@ $(window).load(function() {
 					var r = d.query.results['Result'];
 					$.cookies.set('search-city', { city: r.city, lat: c.latitude, lon: c.longitude });
 					$('#search-city').html(r.city).removeClass('preliminary').closest('#search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);					
+					$('#spinner').hide();
 				}	
 			);
 		}, function(m) {
 			console.log(m);
 			var c = $.cookies.get('search-city');
 			$('#search-city').html(c.city).removeClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
+		}, {
+		    enableHighAccuracy: false,
+		    maximumAge: 3600
 		});
 	}
 });
