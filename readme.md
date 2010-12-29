@@ -1,4 +1,4 @@
-- update capfile to import cities and teams: mongorestore assets/data/dump
+- update capfile to import cities and teams: mongorestore --dump assets/data/dump
 + sitemap.xml
 
 oots.cc

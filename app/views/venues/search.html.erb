@@ -1,7 +1,19 @@
 <% content_for :page_body do %>
-	<div id="search-form" style="text-align: center; padding-top: 22px;">
+	<div id="venue-search-form" style="text-align: center; padding-top: 22px;">
 		<% #I'm in <span id="search-city"><img  src="/images/spinner.gif" style="padding: 0 3px;" /></span> and I want to watch
 		 %>
 		I'm looking for a place to watch <span id="search-team-definite-article">the </span><input id="search-team" type="text" placeholder="team name" autofocus data-teams='<%= @teams.to_json %>'>
 	</div>
+	
+	<ul id="venue-search-results"></ul>
+	
+<% end %>
+
+<% content_for :page_end do %>
+	<script type="text/html" charset="utf-8" class="template" id="venue-search-result">
+		<li>
+			<h2><a href="/v/#{slug}">#{name}</a></h2>
+			#{address}
+		</li>
+	</script>
 <% end %>

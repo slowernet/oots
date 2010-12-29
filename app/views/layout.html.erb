@@ -14,27 +14,26 @@
 	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
 	<link rel="canonical" href="<%= "#{CONFIG['base_url']}#{request.path_info}" %>" />
 	
-	<%= stylesheet_link_tag "/stylesheets/reset.css", 
-		"/stylesheets/public.css", 
-		# "/stylesheets/tipsy.css",
-		"/stylesheets/custom-theme/jquery-ui-1.8.5.custom.css", 
-		:cache => "/stylesheets/_bundle.css",
-		:compress => true
-	%>
-
 	<script src="/javascripts/head.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		head.js(
-			"/javascripts/jquery.js",
+			"http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js", 
 			"/javascripts/jquery-ui-1.8.5.custom.min.js",
 			"/javascripts/jquery.cookies.js",
 			"/javascripts/jquery.elastic.js",
-			"/javascripts/jquery.form.js",
+			// "/javascripts/jquery.form.js",
 			"/javascripts/jquery.qtip.js",
 			"/javascripts/underscore.js",
 			"/javascripts/public.js"
 		);
 	</script>
+
+	<%= stylesheet_link_tag "/stylesheets/public.css", 
+		"/stylesheets/custom-theme/jquery-ui-1.8.5.custom.css", 
+		:cache => "/stylesheets/_bundle.css",
+		:compress => true
+	%>
+
 	<%= yield_content :page_head %>
 </head>
 
@@ -85,21 +84,14 @@
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-19133487-2']);
 		_gaq.push(['_trackPageview']);
-		(function() {
-			head.js(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js');
-			// var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			// ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			// var s = document.getElementsByTagName('script')[0]; 
-			// s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
 
-	<script type="text/javascript">
 		_qoptions = { qacct: "p-6b24jK0EWRBbE" };
-		head.js('http://edge.quantserve.com/quant.js');
+
+		head.js(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js')
+			.js('http://edge.quantserve.com/quant.js');
 	</script>
 	<noscript>
-		<img src="http://pixel.quantserve.com/pixel/p-6b24jK0EWRBbE.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+		<img src="http://pixel.quantserve.com/pixel/p-6b24jK0EWRBbE.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast">
 	</noscript>
 	
 </body>

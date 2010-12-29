@@ -19,29 +19,31 @@
 		</ul>
 	</div>
 	
-	<!-- <h3>Teams</h3> -->
+	<h2>Teams watched here</h2>
 	<ul>
-	<% if @venue.bonds.blank? %>
-		<!-- <li><a href='#' id="open-add-bond">&rarr; No teams. Add one?</a></li> -->
-	<% else %>
-		<!-- <li><a href='#' id="open-add-bond">&rarr; Associate another team with this venue?</a></li> -->
-	<% end %>
+		<%  @venue.bonds.each do |bond| %>
+			<li>
+				<h3><%= bond.team.name %></h3>
+			</li>
+		<% end %>
 	</ul>
 	
 	<% form_for(Bond.new, "#{@venue.permalink}/bonds", :method => 'post', :id => 'add-bond') do |f| %>
-		<input type="text" name="bond[team_name]" id="bond-team-name" placeholder="Team name" data-teams='<%= @teams.to_json %>'>
+		<div style="padding-bottom: 10px;">
+			<input type="text" id="bond-team-name" placeholder="Team name" data-teams='<%= @teams.to_json %>'>
 
-		games are
+			games are
 		
-		<ul class="select" name="bond[strength]" style="display: inline-block;">
-			<li class="selected"><a href="#">always</a></li>
-			<li class=""><a href="#">usually</a></li>
-			<li class=""><a href="#">sometimes</a></li>
-		</ul>
+			<ul class="select" name="bond[strength]" style="display: inline-block;">
+				<li class="selected" data-strength="1"><a href="#">always</a></li>
+				<li class="" data-strength="2"><a href="#">usually</a></li>
+				<li class="" data-strength="3"><a href="#">sometimes</a></li>
+			</ul>
+
+			<div style="padding-left: 113px; display: inline-block;">shown here.</div>
+		</div>
 		
-		<div style="padding-left: 113px; display: inline-block;">shown here.</div>
-		
-		<textarea id="bond-note" name="bond[note]" placeholder="Additional info..."></textarea>
+		<textarea id="bond-note" name="bond[note]" placeholder="Additional information..."></textarea>
 		<br />
 
 		<%= submit_tag('Save', :class => 'rgbabutton large blue') %>

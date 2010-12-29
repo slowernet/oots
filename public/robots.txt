@@ -1,2 +1,4 @@
+Sitemap: http://outoftownsports.com/sitemap.xml
+
 User-agent: *
 Allow: /

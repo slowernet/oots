@@ -9,11 +9,11 @@ get '/venues/search' do
 	respond_to do |wants|
 		wants.html { redirect '/' }
 		wants.js {
+			content_type 'application/json', :charset => 'utf-8'
 			if params[:foursquare_id]
 				Venue.where(:foursquare_id => params[:foursquare_id].to_i).all.to_json
 			elsif params
-				
-				Venue.where("bonds.team_id" => params[:team_id]).where(:latlon => {'$near' => [ params[:lat].to_f, params[:lon].to_f ]}).limit(25).all.to_json
+				Venue.where("bonds.team_id" => BSON::ObjectId(params[:team_id])).all.to_json
 			end
 		}
 	end
@@ -55,6 +55,6 @@ post '/v/:slug/bonds' do
 	# params.inspect
 	venue = Venue.find_by_slug(params[:slug])
 	venue.bonds << Bond.new(params[:bond])
-	(params[:bond]).inspect
-	# redirect venue.permalink
+	venue.save
+	redirect venue.permalink
 end

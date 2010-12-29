@@ -2,6 +2,7 @@ class Bond
 	include MongoMapper::EmbeddedDocument
 
 	key :team_id, ObjectId
+	belongs_to :team
 	key :strength, Integer
 	key :note, String
 end

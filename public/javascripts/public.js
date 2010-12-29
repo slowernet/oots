@@ -1,5 +1,9 @@
 $(document).ready(function() {
-	_.templateSettings = { interpolate : /\#\{(.+?)\}/g };	// #{} style
+	
+	_.templateSettings = {
+	    evaluate    : /\#\[([\s\S]+?)\]/g,
+		interpolate : /\#\{(.+?)\}/g
+	};
 	
 	$('img.defer').each(function() {
 		this.src = $(this).data('src');
@@ -9,7 +13,7 @@ $(document).ready(function() {
 	// $('#geolocation-permission').qtip('api').destroy();
 	
 	if ((c = $.cookies.get('search-city')) && c.lat) {
-		$('#search-city').html(c.city).addClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
+		$('#search-city').html(c.city).addClass('preliminary').closest('#venue-search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
 	}
 	
 	$('#search-team').focus().autocomplete({ 
@@ -20,9 +24,17 @@ $(document).ready(function() {
 			cb(teams);
 		},
 		select: function(e, ui) {
-			$(this).blur().closest('#search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
+			$('#venue-search-results').empty();
+			$(this).blur().closest('#venue-search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
 			ui.item.the ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
-			$.getJSON('/venues/search.js?' + $.param($(this).closest('#search-form').data()) + '&callback=?', function() {
+			$.getJSON('/venues/search.js?' + $.param($(this).closest('#venue-search-form').data()) + '&callback=?', function(results) {
+				if (results.length > 0) {
+					_.each(results, function(r) {
+						$('#venue-search-results').append(_.template($('.template#venue-search-result').html(), r));
+					});
+				} else {
+					$('#venue-search-results').append('<li class="no-results">No results</li>');
+				}
 			});
 		}
 	});
@@ -121,21 +133,7 @@ $(document).ready(function() {
 	// bond edit /////////////////////////////////////////
 
 	$('#bond-note').elastic();
-	
-// 	$('#add-bond').submit(function() {
-// 		var $that = $(this);
-// 		$(this).children('ul.select').each(function(us) {
-// 			$that.append("<input type='hidden' name='" + $(this).children('ul.select').name + "' value='" + $(this).data('strength') + "'>"); 
-// 		});
-// 		return false;
-// 	});
-	
-	$('#open-add-bond').click(function() {
-		$(this).hide();
-		$('#add-bond').toggle(); 
-		return false;
-	});
-	
+
 	$('#bond-team-name').autocomplete({
 		source: function(r, cb) {
 			var teams = _.select($('#bond-team-name').data('teams'), function(team) {
@@ -144,9 +142,28 @@ $(document).ready(function() {
 			cb(teams);
 		},
 		select: function(e, ui) {
+			$(this).data('team_id', ui.item.id);
 		}		
 	});
+
+	// package up our fancy form elements
+	$('#add-bond').submit(function() {
+		$(this).find('.select').each(function() {
+			$(this).append("<input type='hidden' name='" + $(this).attr('name') + "' value='" + $(this).find('.selected').data('strength') + "'>"); 
+		});
+		$(this).find('#bond-team-name').each(function() { 
+			$(this).after("<input type='hidden' name='bond[team_id]' value='" + $(this).data('team_id') + "'>"); 
+		});
+	});
+	
+	// $('#open-add-bond').click(function() {
+	// 	$(this).hide();
+	// 	$('#add-bond').toggle(); 
+	// 	return false;
+	// });	
 });
+
+///////////////////////////////////////////
 
 $(window).load(function() {
 	if ($('#search-city').length && navigator.geolocation) {
@@ -170,14 +187,14 @@ $(window).load(function() {
 				}, function(d) {
 					var r = d.query.results['Result'];
 					$.cookies.set('search-city', { city: r.city, lat: c.latitude, lon: c.longitude });
-					$('#search-city').html(r.city).removeClass('preliminary').closest('#search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);					
+					$('#search-city').html(r.city).removeClass('preliminary').closest('#venue-search-form').data('city', r.city).data('lat', c.latitude).data('lon', c.longitude);					
 					$('#spinner').hide();
 				}	
 			);
 		}, function(m) {
 			console.log(m);
 			var c = $.cookies.get('search-city');
-			$('#search-city').html(c.city).removeClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
+			$('#search-city').html(c.city).removeClass('preliminary').closest('#venue-search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
 		}, {
 		    enableHighAccuracy: false,
 		    maximumAge: 3600
