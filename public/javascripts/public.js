@@ -16,7 +16,8 @@ $(document).ready(function() {
 		$('#search-city').html(c.city).addClass('preliminary').closest('#venue-search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
 	}
 	
-	$('#search-team').focus().autocomplete({ 
+	$('#search-team').focus().autocomplete({
+		delay: 0,
 		source: function(r, cb) {
 			var teams = _.select($('#search-team').data('teams'), function(team) {
 				return (team.label + " " + (team.altnames == null ? '' : team.altnames)).match(new RegExp(r.term, 'i')) != null; 
@@ -135,6 +136,7 @@ $(document).ready(function() {
 	$('#bond-note').elastic();
 
 	$('#bond-team-name').autocomplete({
+		delay: 0,
 		source: function(r, cb) {
 			var teams = _.select($('#bond-team-name').data('teams'), function(team) {
 				return (team.label + " " + (team.altnames == null ? '' : team.altnames)).match(new RegExp(r.term, 'i')) != null; 
