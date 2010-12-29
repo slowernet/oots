@@ -4,7 +4,7 @@ class Team
 	
 	key :name, String, :required => true
 	key :slug, String, :required => true, :unique => true
-	key :definite_article, Boolean
+	key :the, Boolean
 	key :sport, String
 	key :league, String
 	key :altnames, String	
@@ -26,15 +26,15 @@ class Team
 	end
 
 	before_validation do |t|
-		t.slug = t.name.dasherize
+		t.slug = "#{t.name} #{t.country}".dasherize
 	end
 
 	def definite_name
-		(definite_article ? 'the ' : '') + name
+		(the ? 'the ' : '') + name
 	end
 	
 	def permalink
-		"/teams/#{slug}"
+		"/t/#{slug}"
 	end
 
 end

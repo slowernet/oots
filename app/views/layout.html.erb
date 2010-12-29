@@ -12,15 +12,29 @@
 	<meta name="description" content="<%= pt = yield_content(:page_title); (pt.blank? ? "" : "#{pt.strip}. ") %>Out of Town Sports (OOTS) is a directory of places where you can watch out-of-town sports teams in any city." />
 	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, where to watch, nfl sunday ticket, mlb extra innings, nfl, mlb, nba, nhl, soccer, football, baseball, hockey, basketball, directory" />
 	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
-	<link rel="canonical" href="<%= "#{$BASE_URL}#{request.path_info}" %>" />
+	<link rel="canonical" href="<%= "#{CONFIG['base_url']}#{request.path_info}" %>" />
 	
 	<%= stylesheet_link_tag "/stylesheets/reset.css", 
 		"/stylesheets/public.css", 
+		# "/stylesheets/tipsy.css",
 		"/stylesheets/custom-theme/jquery-ui-1.8.5.custom.css", 
-		:cache => "/stylesheets/bundle.css",
+		:cache => "/stylesheets/_bundle.css",
 		:compress => true
 	%>
 
+	<script src="/javascripts/head.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		head.js(
+			"/javascripts/jquery.js",
+			"/javascripts/jquery-ui-1.8.5.custom.min.js",
+			"/javascripts/jquery.cookies.js",
+			"/javascripts/jquery.elastic.js",
+			"/javascripts/jquery.form.js",
+			"/javascripts/jquery.qtip.js",
+			"/javascripts/underscore.js",
+			"/javascripts/public.js"
+		);
+	</script>
 	<%= yield_content :page_head %>
 </head>
 
@@ -28,11 +42,10 @@
 	<div id="page-header">
 		<a href="/" class="site-title"><img src="/images/oots-title.png" height="34" width="500" title="Out of Town Sports" border="0"></a>
 	</div>
-	
-	<div id="@ad-bar" style="">
-		<!-- <iframe src="/ad-leaderboard.html" seamless="seamless" style="width: 728px; height: 90px; overflow: hidden; margin: 10px auto; display: block;"></iframe> -->
+	<div id="page-subheader">
+		Find the best place to watch your team, anywhere.
 	</div>
-
+	
 	<div id="page-body">
 		<%= yield_content :page_body %>
 	</div>
@@ -41,14 +54,15 @@
 		<div>
 			<ul>
 				<li><a href="/">OOTS home</a></li>
-				<% if (request.cookies['admin'] == $SECRET) %>
+				<li><a href="/about">About</a></li>
+				<% if (request.cookies['admin'] == CONFIG['secret']) %>
 					<li><a href="/venues/new">New venue</a></li>
 					<li><a href="/venues">List venues</a></li>
 					<li><a href="/teams/new">Add a team</a></li>
 				<% end %>
 			</ul>
 			<ul>
-				<li><a href="/about">About</a></li>
+				<li><a href="http://twitter.com/outoftownsports" target="_blank">Twitter</a></li>
 				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
 					<div id="mailing-list-signup" style="display: none;">
 						<%= partial :'meta/mailinglist' %>
@@ -56,27 +70,14 @@
 				</li>
 			</ul>
 			<ul>
-				<li><a href="http://twitter.com/outoftownsports" target="_blank"><img src="/images/twitter-icon.png" height="20" width="20" border="0"></a></li>
-			</ul>
-			<ul>
-				<li><a href="http://s46.sitemeter.com/stats.asp?site=s46outoftownsports" target="_top"><img src="http://s46.sitemeter.com/meter.asp?site=s46outoftownsports&1103616580" alt="Site Meter" border="0" height="20" width="20"></a></li>
+				<li><a href='/teams'>Teams</a></li>
 			</ul>
 			<div style="clear: both;"> </div>
 		</div>
 	</div>
 	
 	<div id="spinner" style="display: none"></div>
-	
-	<%= javascript_include_tag "/javascripts/jquery.js",
-		"/javascripts/jquery-ui-1.8.5.custom.min.js",
-		"/javascripts/jquery.cookies.js",
-		"/javascripts/jquery.elastic.js",
-		# "/javascripts/jquery.form.js",
-		"/javascripts/underscore.js",
-		"/javascripts/public.js",
-		:cache => "/javascripts/bundle.js",
-		:compress => true
-	%>
+	<div id="geolocation-permission" title="If your browser asks for permission to locate you, please OK it - you'll get better search results. We don't save your location."></div>
 	
 	<%= yield_content :page_end %>
 	
@@ -85,16 +86,17 @@
 		_gaq.push(['_setAccount', 'UA-19133487-2']);
 		_gaq.push(['_trackPageview']);
 		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; 
-			s.parentNode.insertBefore(ga, s);
+			head.js(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js');
+			// var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			// ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			// var s = document.getElementsByTagName('script')[0]; 
+			// s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
 
 	<script type="text/javascript">
 		_qoptions = { qacct: "p-6b24jK0EWRBbE" };
-		$.getScript('http://edge.quantserve.com/quant.js');
+		head.js('http://edge.quantserve.com/quant.js');
 	</script>
 	<noscript>
 		<img src="http://pixel.quantserve.com/pixel/p-6b24jK0EWRBbE.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>

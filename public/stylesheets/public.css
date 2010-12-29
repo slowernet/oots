@@ -23,7 +23,7 @@ a {
 }
 
 h1 {
-	font-size: 24pt;
+	font-size: 25pt;
 	margin-bottom: 14pt;
 }
 
@@ -145,11 +145,28 @@ ul.select li a:hover {
 	-moz-border-radius: 4px; 
 }
 
+#geolocation-permission {
+	position: fixed;
+	top: 2px;
+	right: 20px;
+	height: 1px;
+	width: 1px;
+	background-color: green;
+}
+
 #page-header {
-  background-color: black;
+	background-color: black;
 	padding: 15px 0;
 	text-align: center;
-	margin-bottom: 15px;
+}
+
+#page-subheader {
+	margin-bottom: 16px;
+	text-align: center;
+	padding: 5px;
+	background-color: #bbb;
+	color: #fff;
+	font-size: 16px;
 }
 
 #ad-bar {
@@ -161,26 +178,27 @@ ul.select li a:hover {
 }
 
 #page-body {
-	width: 829px;
+	width: 759px;
+	min-height: 400px;
 	margin: 0 auto 60px;
 	padding: 0 6px;
 }
 
 #page-footer {
 /*  border-top: 1px solid #ddd;*/
-/*  background-color: #eee;*/
+	background-color: #f6f6f6;
 	padding: 15px 0px;
 }
 
 #page-footer>div {
 	margin: 0 auto;
-	width: 829px;
+	width: 759px;
 }
 
 #page-footer ul {
 	font-size: 14px;
 	float: left;
-	width: 204px;
+	width: 33%;
 }
 
 a.site-title img {
@@ -226,7 +244,7 @@ a.site-title img {
 
 #bond-note,
 #bond-team-name {
-	width: 300px;
+	width: 180px;
 	padding: 6px 9px 7px;
 	font-size: 16px; 	
 }

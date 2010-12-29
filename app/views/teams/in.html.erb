@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :page_body do %>
-	<h1><%= "#{@team.definite_name.titleize} (#{@team.league}) in #{@city.name}, #{@city.statecode}" %></h1>
+	<h1><%= "#{@team.definite_name.titleize} in #{@city.name}, #{@city.statecode}" %></h1>
 	
 	<% if @venues.blank? %>
 		We don't know of anyplace to watch <%= @team.definite_name %> in <%= @city.name %>. <a href="/venues/new?location=<%= URI.escape "#{@city.name}, #{@city.statecode}" %>&team=<%= @team.slug %>">Add one?</a>

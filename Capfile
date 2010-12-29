@@ -56,7 +56,7 @@ namespace :deploy do
 end
 
 # after "deploy:setup", "deploy:create_shared_directories"
-after "deploy:update_code", "deploy:symlink_shared_directories"
+#after "deploy:update_code", "deploy:symlink_shared_directories"
 after "deploy:update_code", "deploy:create_tmpdir"
 after "deploy:update_code", "deploy:passenger_restart"
 after "deploy:update", "deploy:cleanup"

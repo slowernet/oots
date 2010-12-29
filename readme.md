@@ -1,5 +1,8 @@
 - update capfile to import cities and teams: mongorestore assets/data/dump
-- sitemap.xml
++ sitemap.xml
+
+oots.cc
+oots.co
 
 # OOTS
 

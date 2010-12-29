@@ -11,7 +11,8 @@ get '/venues/search' do
 		wants.js {
 			if params[:foursquare_id]
 				Venue.where(:foursquare_id => params[:foursquare_id].to_i).all.to_json
-			else
+			elsif params
+				
 				Venue.where("bonds.team_id" => params[:team_id]).where(:latlon => {'$near' => [ params[:lat].to_f, params[:lon].to_f ]}).limit(25).all.to_json
 			end
 		}
@@ -19,6 +20,10 @@ get '/venues/search' do
 end
 
 get '/venues/:slug' do
+	redirect "/v/#{params[:slug]}"
+end
+
+get '/v/:slug' do
 	@venue = Venue.find_by_slug(params[:slug])
 	@teams = teams_for_select
 	erb :'venues/show'
@@ -41,13 +46,15 @@ post '/venues' do
 end
 
 get "/venues" do
-	redirect '/' unless (request.cookies['admin'] == $SECRET)
-	@venues = Venue.all
+	redirect '/' unless (request.cookies['admin'] == CONFIG['secret'])
+	@venues = Venue.all(:order => 'country, state, city, name')
 	erb :'venues/index'
 end
 
-post '/venues/:slug/bonds' do
+post '/v/:slug/bonds' do
 	# params.inspect
-	@venue = Venue.find_by_slug(params[:slug])
-	# @venue.bonds << Bond.new({params[:bond]})
+	venue = Venue.find_by_slug(params[:slug])
+	venue.bonds << Bond.new(params[:bond])
+	(params[:bond]).inspect
+	# redirect venue.permalink
 end

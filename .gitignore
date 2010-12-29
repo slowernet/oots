@@ -2,5 +2,7 @@
 *.log
 *.tmp
 .DS_Store
-public/*/bundle.*
+public/*/_bundle.*
 tmp/*
+config.json
+Capfile

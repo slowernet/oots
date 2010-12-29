@@ -1,11 +1,20 @@
+get '/teams' do
+  @teams = Team.all(:order => 'country, league, name')
+  erb :'teams/index'
+end
+
 get '/teams/new' do
-	redirect '/' unless (request.cookies['admin'] == $SECRET)
+	redirect '/' unless (request.cookies['admin'] == CONFIG['secret'])
 	@form = { :method => 'post', :endpoint => '/teams' }
 	@team = Team.new
 	erb :'teams/edit'
 end
 
 get '/teams/:slug' do
+	redirect "/t/#{params[:slug]}"
+end
+
+get '/t/:slug' do
 	@team = Team.find_by_slug(params[:slug])
 	erb :'teams/show'
 end
@@ -16,7 +25,7 @@ get '/teams/:slug/edit' do
 	erb :'teams/edit'
 end
 
-get '/:team_slug/in/:city_slug' do
+get '/t/:team_slug/in/:city_slug' do
 	@team = Team.find_by_slug(params[:team_slug])
 	@city = City.find_by_slug(params[:city_slug])
 	erb :'teams/in'

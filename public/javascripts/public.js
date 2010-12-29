@@ -6,7 +6,8 @@ $(document).ready(function() {
 	});
 	
 	// venue search /////////////////////////////////////////
-
+	// $('#geolocation-permission').qtip('api').destroy();
+	
 	if ((c = $.cookies.get('search-city')) && c.lat) {
 		$('#search-city').html(c.city).addClass('preliminary').closest('#search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
 	}
@@ -20,7 +21,7 @@ $(document).ready(function() {
 		},
 		select: function(e, ui) {
 			$(this).blur().closest('#search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
-			ui.item.definite_article ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
+			ui.item.the ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
 			$.getJSON('/venues/search.js?' + $.param($(this).closest('#search-form').data()) + '&callback=?', function() {
 			});
 		}
@@ -121,14 +122,13 @@ $(document).ready(function() {
 
 	$('#bond-note').elastic();
 	
-	$('#add-bond').submit(function() {
-		var $that = $(this);
-		$(this).children('ul.select').each(function(us) {
-// console.log($(this).data());
-			$that.append("<input type='hidden' name='" + $(this).children('ul.select').name + "' value='" + $(this).data('strength') + "'>"); 
-		});
-		return false;
-	});
+// 	$('#add-bond').submit(function() {
+// 		var $that = $(this);
+// 		$(this).children('ul.select').each(function(us) {
+// 			$that.append("<input type='hidden' name='" + $(this).children('ul.select').name + "' value='" + $(this).data('strength') + "'>"); 
+// 		});
+// 		return false;
+// 	});
 	
 	$('#open-add-bond').click(function() {
 		$(this).hide();
@@ -151,6 +151,15 @@ $(document).ready(function() {
 $(window).load(function() {
 	if ($('#search-city').length && navigator.geolocation) {
 		$('#spinner').show();
+
+		$('#geolocation-permission').qtip({
+			position: { corner: { target: 'bottomLeft', tooltip: 'topRight' } },
+			style: { width: 180, color: '#444', border: { radius: 7 }, lineHeight: '1.35em', padding: 10, tip: 'topRight', name: 'cream' }
+		}).mouseover();
+		setTimeout(function() {
+			$('#geolocation-permission').qtip('api').hide();
+		}, 5000);
+
 		navigator.geolocation.getCurrentPosition(function(position) {
 			var c = position.coords;
 			$.getJSON(

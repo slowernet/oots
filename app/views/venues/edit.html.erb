@@ -5,7 +5,7 @@
 	<ul class="form" id="venue-pre-edit-search">
 		<li>
 			<label>Rough location (zipcode, city + state, etc.)</label><br />
-			<%= text_field_tag(:league, :id => 'venue-search-location') %>
+			<%= text_field_tag(:league, :id => 'venue-search-location', :value => params[:location]) %>
 		</li>
 		<li>
 			<label>Name</label><br />
@@ -74,7 +74,7 @@
 
 <% content_for :page_end do %>
 	<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
+	head.ready(function() {
 		try {
 			var qs = _(location.search.substring(1).split('&')).chain()
 				.map(function(p) { return p.split('='); })

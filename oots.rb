@@ -16,9 +16,6 @@ require 'mongo_mapper'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
 
 
-$BASE_URL = 'http://outoftownsports.com'
-$SECRET = '2f0226e3ad7560db28c6e41c1d92e394'
-
 # http://ipinfodb.com/ip_location_api.php
 # $IPINFODB_API_KEY = '0c3dfc109da55ad6220ba55e2baaf44af5da8469ee19bb4be59820917acf8fa1'
 
@@ -35,9 +32,10 @@ end
 use Rack::JSONP
 
 configure do
-	dbname = "oots"
-	MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017, :logger => Logger.new('log/db.log')) if development?
-	MongoMapper.database = dbname
+	CONFIG = JSON.parse(IO.read("#{File.dirname(__FILE__)}/config.json")).select { |k,v| ['default', Sinatra::Application.environment.to_s].include?(k) }.map { |a| a.last }.inject({}) { |m,e| m.merge(e) }	
+
+	MongoMapper.connection = Mongo::Connection.new(CONFIG['db']['host'], CONFIG['db']['port'])
+	MongoMapper.database = CONFIG['db']['name']
 	MongoMapper.handle_passenger_forking
 	
 	# use Rack::GridFS, :hostname => 'localhost', :port => 27017, :database => dbname, :prefix => 'images/gridfs'
@@ -63,7 +61,7 @@ def teams_for_select
 		:id => t.id, 
 		:label => t.name, 
 		:altnames => t.altnames, 
-		:definite_article => t.definite_article
+		:the => t.the
 	}}
 end
 
@@ -89,7 +87,7 @@ get '/sitemap' do
 	end
 end
 
-get "/#{$SECRET}" do
-	response.set_cookie('admin', $SECRET);
+get "/#{CONFIG['secret']}" do
+	response.set_cookie('admin', CONFIG['secret']);
 	redirect '/'
 end

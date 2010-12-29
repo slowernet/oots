@@ -34,7 +34,7 @@ class Venue
 	end
 
 	def permalink
-		"/venues/#{slug}"
+		"/v/#{slug}"
 	end
 
 end
