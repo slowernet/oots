@@ -26,7 +26,8 @@ get '/teams/:slug/edit' do
 end
 
 get '/:team_slug/in/:city_slug' do
-	redirect "/t/#{params[:team_slug]}/in/#{params[:city_slug]}", 301
+	team = Team.where(:name => Regexp.new(params[:team_slug], 'i')).first	# legacy
+	redirect "/t/#{team.slug}/in/#{params[:city_slug]}", 301
 end
 
 get '/t/:team_slug/in/:city_slug' do
