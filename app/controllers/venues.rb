@@ -41,7 +41,9 @@ get '/venues/f/:foursquare_id' do
 end
 
 post '/venues' do
-	venue = Venue.create!(params[:venue])
+	p = params[:venue]
+	p.merge!({ 'latlon' => [ p.delete('lat').to_f, p.delete('lon').to_f ] })
+	venue = Venue.create!(p)
 	redirect venue.permalink
 end
 

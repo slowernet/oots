@@ -43,6 +43,7 @@ configure do
 	# CACHE = ActiveSupport::Cache.lookup_store(Bin::Store.new(MongoMapper.database['cache']))
 
 	helpers AssetBundler::ViewHelper	# http://github.com/gbuesing/asset_bundler	
+	helpers TemplateBundler::ViewHelper
 end
 
 Dir[File.join(File.dirname(__FILE__), "app", "models", "*.rb")].each { |file| require file }

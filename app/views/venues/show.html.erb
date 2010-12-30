@@ -23,9 +23,10 @@
 	<ul>
 		<%  @venue.bonds.each do |bond| %>
 			<li>
-				<h3><%= bond.team.name %></h3>
+				<h3><a href="<%= bond.team.permalink %>"><%= bond.team.name %></a> [<%= bond.strength %>]</h3>
 			</li>
 		<% end %>
+		<br />
 	</ul>
 	
 	<% form_for(Bond.new, "#{@venue.permalink}/bonds", :method => 'post', :id => 'add-bond') do |f| %>
@@ -37,7 +38,7 @@
 			<ul class="select" name="bond[strength]" style="display: inline-block;">
 				<li class="selected" data-strength="1"><a href="#">always</a></li>
 				<li class="" data-strength="2"><a href="#">usually</a></li>
-				<li class="" data-strength="3"><a href="#">sometimes</a></li>
+				<li class="" data-strength="3"><a href="#">occasionally</a></li>
 			</ul>
 
 			<div style="padding-left: 113px; display: inline-block;">shown here.</div>

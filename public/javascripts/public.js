@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	
 	_.templateSettings = {
-	    evaluate    : /\#\[([\s\S]+?)\]/g,
-		interpolate : /\#\{(.+?)\}/g
+	    evaluate    : /\<\%([\s\S]+?)\%\>/g,
+		interpolate : /\<\%\=(.+?)\%\>/g
 	};
 	
 	$('img.defer').each(function() {
@@ -31,7 +31,7 @@ $(document).ready(function() {
 			$.getJSON('/venues/search.js?' + $.param($(this).closest('#venue-search-form').data()) + '&callback=?', function(results) {
 				if (results.length > 0) {
 					_.each(results, function(r) {
-						$('#venue-search-results').append(_.template($('.template#venue-search-result').html(), r));
+						$('#venue-search-results').append(_.template($('.template#venues-show').html(), { "show": r }));
 					});
 				} else {
 					$('#venue-search-results').append('<li class="no-results">No results</li>');
@@ -100,6 +100,8 @@ $(document).ready(function() {
 			$.each(['address', 'city', 'state', 'zip', 'crossstreet', 'phone', 'twitter'], function(i, v) {
 				jQuery('#venue_' + v).val(venue[v]);
 			});
+			$('#venue_lat').val(venue['geolat']);
+			$('#venue_lon').val(venue['geolong']);
 			jQuery('#venue_foursquare_id').val(venue['id']);
 		}
 	});

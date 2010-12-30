@@ -8,5 +8,8 @@
 	<% if @venues.blank? %>
 		We don't know of anyplace to watch <%= @team.definite_name %> in <%= @city.name %>. <a href="/venues/new?location=<%= URI.escape "#{@city.name}, #{@city.statecode}" %>&team=<%= @team.slug %>">Add one?</a>
 	<% else %>
+		<ul>
+			<%= partial :'venues/show', :collection => @venues %>
+		</ul>
 	<% end %>
 <% end %>

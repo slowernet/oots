@@ -24,7 +24,7 @@
 			// "/javascripts/jquery.form.js",
 			"/javascripts/jquery.qtip.js",
 			"/javascripts/underscore.js",
-			"/javascripts/backbone.js",
+			// "/javascripts/backbone.js",
 			"/javascripts/public.js"
 		);
 	</script>
@@ -56,21 +56,21 @@
 				<li><a href="/">OOTS home</a></li>
 				<li><a href="/about">About</a></li>
 				<% if (request.cookies['admin'] == CONFIG['secret']) %>
+				<li><a href="/venues">Venues</a></li>
 					<li><a href="/venues/new">New venue</a></li>
-					<li><a href="/venues">List venues</a></li>
-					<li><a href="/teams/new">Add a team</a></li>
+					<li><a href='/teams'>Teams</a></li>
+					<li><a href="/teams/new">New team</a></li>
 				<% end %>
 			</ul>
 			<ul>
 				<li><a href="http://twitter.com/outoftownsports" target="_blank">Twitter</a></li>
+			</ul>
+			<ul>
 				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
 					<div id="mailing-list-signup" style="display: none;">
 						<%= partial :'meta/mailinglist' %>
 					</div>
 				</li>
-			</ul>
-			<ul>
-				<li><a href='/teams'>Teams</a></li>
 			</ul>
 			<div style="clear: both;"> </div>
 		</div>
@@ -80,6 +80,10 @@
 	<div id="geolocation-permission" title="If your browser asks for permission to locate you, please OK it - you'll get better search results. We don't save your location."></div>
 	
 	<%= yield_content :page_end %>
+
+	<div class="templates" style="display: none;">
+		<%= include_templates(settings.root + '/app/views') %>
+	</div>
 	
 	<script type="text/javascript" charset="utf-8">
 		var _gaq = _gaq || [];
@@ -88,8 +92,7 @@
 
 		_qoptions = { qacct: "p-6b24jK0EWRBbE" };
 
-		head.js(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js')
-			.js('http://edge.quantserve.com/quant.js');
+		head.js(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js').js('http://edge.quantserve.com/quant.js');
 	</script>
 	<noscript>
 		<img src="http://pixel.quantserve.com/pixel/p-6b24jK0EWRBbE.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast">

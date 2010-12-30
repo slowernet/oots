@@ -19,6 +19,8 @@
 		<% end %>
 		<ul>
 			<%= f.hidden_field(:foursquare_id) %>
+			<%= f.hidden_field(:lat) %>
+			<%= f.hidden_field(:lon) %>
 			<li>
 				<label>Name</label><br />
 				<%= f.text_field(:name) %>

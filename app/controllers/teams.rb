@@ -1,6 +1,9 @@
 get '/teams' do
-  @teams = Team.all(:order => 'country, league, name')
-  erb :'teams/index'
+	@teams = Team.all(:order => 'country, league, name')
+	@teams.map do |team|
+		
+	end
+	erb :'teams/index'
 end
 
 get '/teams/new' do
@@ -33,6 +36,7 @@ end
 get '/t/:team_slug/in/:city_slug' do
 	@team = Team.find_by_slug(params[:team_slug])
 	@city = City.find_by_slug(params[:city_slug])
+	@venues = Venue.where({ :latlon => { "$within" => { "$center" => [ @city.latlon, (@city.radius / 5280 / 69.172) ] }}}).where("bonds.team_id" => @team.id).all
 	erb :'teams/in'
 end
 
