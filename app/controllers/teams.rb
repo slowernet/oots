@@ -26,7 +26,7 @@ get '/teams/:slug/edit' do
 end
 
 get '/:team_slug/in/:city_slug' do
-	redirect "/t/#{params[:team_slug]}/in/#{params[:city_slug]}}", 301
+	redirect "/t/#{params[:team_slug]}/in/#{params[:city_slug]}", 301
 end
 
 get '/t/:team_slug/in/:city_slug' do
