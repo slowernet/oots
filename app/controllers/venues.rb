@@ -20,7 +20,7 @@ get '/venues/search' do
 end
 
 get '/venues/:slug' do
-	redirect "/v/#{params[:slug]}"
+	redirect "/v/#{params[:slug]}", 301
 end
 
 get '/v/:slug' do

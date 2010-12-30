@@ -11,7 +11,7 @@ get '/teams/new' do
 end
 
 get '/teams/:slug' do
-	redirect "/t/#{params[:slug]}"
+	redirect "/t/#{params[:slug]}", 301
 end
 
 get '/t/:slug' do
@@ -23,6 +23,10 @@ get '/teams/:slug/edit' do
 	@team = Team.find_by_slug(params[:slug])
 	@form = { :method => 'put', :endpoint => '/teams' }
 	erb :'teams/edit'
+end
+
+get '/:team_slug/in/:city_slug' do
+	redirect "/t/#{params[:team_slug]}/in/#{params[:city_slug]}}", 301
 end
 
 get '/t/:team_slug/in/:city_slug' do
