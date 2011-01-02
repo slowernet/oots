@@ -99,6 +99,10 @@ ul {
 	line-height: 1.5em;
 }
 
+img.defer {
+	background: transparent url(/images/spinner.gif) 50% 50% no-repeat;
+}
+
 /* http://net.tutsplus.com/tutorials/html-css-techniques/design-a-prettier-web-form-with-css-3/ */
 
 input[type=text], 
