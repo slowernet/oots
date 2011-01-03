@@ -11,7 +11,7 @@
 	<% @cities.each do |c| %>
 		<% @teams.each do |t| %>
 			<url>
-				<loc><%= CONFIG['base_url'] %>/t/<%= t.slug %>/in/<%= c.slug %></loc>
+				<loc><%= CONFIG['base_url'] %>/<%= t.slug %>/<%= c.slug %></loc>
 				<changefreq>weekly</changefreq>
 			</url>
 		<% end %>

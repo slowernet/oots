@@ -47,7 +47,7 @@ configure do
 end
 
 Dir[File.join(File.dirname(__FILE__), "app", "models", "*.rb")].each { |file| require file }
-Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |file| require file }
+
 # require 'app/helpers'
 
 #####################
@@ -92,3 +92,5 @@ get "/#{CONFIG['secret']}" do
 	response.set_cookie('admin', CONFIG['secret']);
 	redirect '/'
 end
+
+Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |file| require file }

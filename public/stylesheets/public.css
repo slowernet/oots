@@ -214,8 +214,8 @@ input[type=text]:focus, textarea:focus {
 }
 
 #page-header {
-	background-color: black;
-	padding: 15px 0;
+	background-color: #555;
+	padding: 12px 0;
 	text-align: center;
 }
 

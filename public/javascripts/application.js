@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	$('img.defer').each(function() {
+		this.src = $(this).data('src');
+	});
+	
 	// venue search /////////////////////////////////////////
 	// $('#geolocation-permission').qtip('api').destroy();
 	

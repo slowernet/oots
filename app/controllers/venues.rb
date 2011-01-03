@@ -20,10 +20,6 @@ get '/venues/search' do
 end
 
 get '/venues/:slug' do
-	redirect "/v/#{params[:slug]}", 301
-end
-
-get '/v/:slug' do
 	@venue = Venue.find_by_slug(params[:slug])
 	@teams = teams_for_select
 	erb :'venues/show'
@@ -53,7 +49,7 @@ get "/venues" do
 	erb :'venues/index'
 end
 
-post '/v/:slug/bonds' do
+post '/venues/:slug/bonds' do
 	# params.inspect
 	venue = Venue.find_by_slug(params[:slug])
 	venue.bonds << Bond.new(params[:bond])

@@ -6,7 +6,7 @@
 	<h1><%= @team.name %></h1>
 	<ul>
 		<% City.where().order(:population.desc).all.each do |c| %>
-			<li><a href="<%= "/t/#{@team.slug}/in/#{c.slug}" %>">Where to watch <%= @team.definite_name %> in <%= "#{c.name}, #{c.state}" %></a></li>
+			<li><a href="<%= "#{@team.slug}/#{c.slug}" %>">Where to watch <%= @team.definite_name %> in <%= "#{c.name}, #{c.state}" %></a></li>
 		<% end %>
 	</ul>
 

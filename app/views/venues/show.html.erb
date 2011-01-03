@@ -23,7 +23,7 @@
 	<ul>
 		<%  @venue.bonds.each do |bond| %>
 			<li>
-				<h3><a href="<%= bond.team.permalink %>"><%= bond.team.name %></a> [<%= bond.strength %>]</h3>
+				<h3><a href="/<%= bond.team.permalink %>"><%= bond.team.name %></a> [<%= bond.strength %>]</h3>
 			</li>
 		<% end %>
 		<br />

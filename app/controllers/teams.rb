@@ -1,8 +1,10 @@
 get '/teams' do
-	@teams = Team.all(:order => 'country, league, name')
-	@teams.map do |team|
-		
-	end
+	# fold the team list by league and sport
+	@sports = Team.all(:order => 'name').inject({}) { |acc, v| 
+		(acc[v.league] ||= []) << v; acc
+	}.inject({}) { |acc, (k,v)|
+		(acc[v.first.sport] ||= {})[k] = v; acc
+	}.sort
 	erb :'teams/index'
 end
 
@@ -13,30 +15,21 @@ get '/teams/new' do
 	erb :'teams/edit'
 end
 
-get '/teams/:slug' do
-	redirect "/t/#{params[:slug]}", 301
-end
-
-get '/t/:slug' do
-	@team = Team.find_by_slug(params[:slug])
+get '/:slug' do
+	pass unless @team = Team.find_by_slug(params[:slug])
 	erb :'teams/show'
 end
 
-get '/teams/:slug/edit' do
-	@team = Team.find_by_slug(params[:slug])
+get '/:slug/edit' do
+	pass unless @team = Team.find_by_slug(params[:slug])
 	@form = { :method => 'put', :endpoint => '/teams' }
 	erb :'teams/edit'
 end
 
-get '/:team_slug/in/:city_slug' do
-	team = Team.where(:name => Regexp.new(params[:team_slug], 'i')).first	# legacy
-	redirect "/t/#{team.slug}/in/#{params[:city_slug]}", 301
-end
-
-get '/t/:team_slug/in/:city_slug' do
-	@team = Team.find_by_slug(params[:team_slug])
+get '/:team_slug/:city_slug' do
+	pass unless @team = Team.find_by_slug(params[:team_slug])
 	@city = City.find_by_slug(params[:city_slug])
-	@venues = Venue.where({ :latlon => { "$within" => { "$center" => [ @city.latlon, (@city.radius / 5280 / 69.172) ] }}}).where("bonds.team_id" => @team.id).all
+	@venues = Venue.where({ :latlon => { "$within" => { "$center" => [ @city.latlon, ((@city.radius) / 1000 / 111.0) ] }}}).where("bonds.team_id" => @team.id).all
 	erb :'teams/in'
 end
 
@@ -50,3 +43,15 @@ post '/teams' do
 	team = Team.create!(params[:team])
 	redirect team.permalink
 end
+
+# redirects
+
+get '/teams/:slug' do
+	redirect "#{params[:slug]}", 301
+end
+
+get '/:team_slug/in/:city_slug' do
+	team = Team.where(:name => Regexp.new(params[:team_slug], 'i')).first	# legacy
+	redirect "#{team.slug}/#{params[:city_slug]}", 301
+end
+

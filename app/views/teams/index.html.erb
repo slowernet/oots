@@ -1,11 +1,21 @@
 <% content_for :page_body do %>
 	<ul>
-		<% @teams.each do |t| %>
-			<li><%= "<a href='#{t.permalink}'>#{t.name}</a>" %> <span style="color: #666;">[<%= t.league %>, <%= t.country %>]</span></li>
+		<% @sports.each do |sport, leagues| %>
+			<h2><%= sport %></h2>
+			<% leagues.each do |league, teams| %>
+				<h3><%= league %><%= " <span style='color: #666;'>[#{teams.first.country}]</span>" %></h3>
+				<ul>
+					<% teams.each do |t| %>
+						<li><%= "<a href='#{t.permalink}'>#{t.name}</a>" %></li>
+					<% end %>
+				</ul>
+				<br />
+			<% end %>
+			<br />
 		<% end %>
 	</ul>
 	
-	<div style="padding: 1em 0;">
+	<div>
 		Your team missing? Suggest it via Twitter: 
 		<div style="display: inline-block; vertical-align: middle;"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://outoftownsports.com" data-text="#suggestion" data-count="none" data-via="outoftownsports" data-related="outoftownsports">Tweet</a></div>
 	</div>

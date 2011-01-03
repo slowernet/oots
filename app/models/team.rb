@@ -26,7 +26,7 @@ class Team
 	end
 
 	before_validation do |t|
-		t.slug = "#{t.name} #{t.country}".dasherize
+		t.slug = "#{t.name}".dasherize
 	end
 
 	def definite_name
@@ -34,7 +34,8 @@ class Team
 	end
 	
 	def permalink
-		"/t/#{slug}"
+		# "/t/#{slug}"
+		slug
 	end
 
 end

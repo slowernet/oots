@@ -13,6 +13,6 @@ class City
 	key :latlon, Array
 
 	before_validation do |c|
-		c.slug = "#{c.name} #{c.statecode} #{c.countrycode}".dasherize
+		c.slug = "#{c.name} #{c.statecode}".dasherize
 	end
 end
