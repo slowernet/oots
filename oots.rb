@@ -62,7 +62,8 @@ def teams_for_select
 		:id => t.id, 
 		:label => t.name, 
 		:altnames => t.altnames, 
-		:the => t.the
+		:the => t.the,
+		:permalink => t.permalink
 	}}
 end
 
