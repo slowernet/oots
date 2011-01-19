@@ -4,12 +4,12 @@
 
 	<ul class="form" id="venue-pre-edit-search">
 		<li>
-			<label>Rough location (zipcode, city + state, etc.)</label><br />
-			<%= text_field_tag(:league, :id => 'venue-search-location', :value => params[:location]) %>
+			<label>Venue name</label><br />
+			<%= text_field_tag(:name, :id => 'venue-search-name') %>
 		</li>
 		<li>
-			<label>Name</label><br />
-			<%= text_field_tag(:name, :id => 'venue-search-name') %>
+			<label>Rough location (zipcode, city + state, etc.)</label><br />
+			<%= text_field_tag(:league, :id => 'venue-search-location', :value => params[:location]) %>
 		</li>
 	</ul>
 

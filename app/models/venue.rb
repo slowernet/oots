@@ -38,4 +38,8 @@ class Venue
 		"/venues/#{slug}"
 	end
 
+	def self.count_for_team(team)
+		Venue.where('bonds.team_id' => team.id).count
+	end
+	
 end

@@ -1,3 +1,5 @@
+# OOTS
+
 - update capfile to import cities and teams: mongorestore --dump assets/data/dump
 + sitemap.xml
 
@@ -6,7 +8,7 @@ oots.co
 
 http://www.citymayors.com/gratis/uscities_100.html
 
-# OOTS
+http://isithackday.com/hacks/geo/yql-geo-library/
 
 http://ipinfodb.com/ip_location_api.php
 

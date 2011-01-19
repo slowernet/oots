@@ -214,12 +214,27 @@ input[type=text]:focus, textarea:focus {
 }
 
 #page-header {
-	background-color: #555;
-	padding: 12px 0;
+/*	width: 759px;
+	margin: 0 auto;*/
+/*	background: #fff url(/images/header-bg.png);*/
+	background-color: #fff;
+	padding: 29px 0 31px;
 	text-align: center;
+/*	border-bottom: 1px dotted #666;*/
+	background: -webkit-gradient(linear, left top, left 30, from(#fff), color-stop(6%, #eee), to(#fff));
+/*	background: -moz-linear-gradient(top, #FFFFFF, #fafafa 1px, #fff 25px);*/
+}
+
+#page-header a {
+	display: block;
+	width: 759px;
+	margin: 0 auto;
+	text-align: left;
+	background: transparent ue;
 }
 
 #page-subheader {
+	display: none;
 	margin-bottom: 16px;
 	text-align: center;
 	padding: 5px;
@@ -244,8 +259,8 @@ input[type=text]:focus, textarea:focus {
 }
 
 #page-footer {
-/*  border-top: 1px solid #ddd;*/
-	background-color: #f6f6f6;
+/*	border-top: 1px solid #ddd;*/
+/*	background-color: #f6f6f6;*/
 	padding: 15px 0px;
 }
 
@@ -260,12 +275,15 @@ input[type=text]:focus, textarea:focus {
 	width: 33%;
 }
 
-a.site-title img {
+a.site-title {
+	color: #844;
+	font-size: 1.5em;
 }
 
 #venue-search-form {
-	color: #666;
-	font-size: 30px;
+	padding-top: 15px;
+/*	color: #666;*/
+	font-size: 28px;
 }
 
 #venue-search-results li {
@@ -284,7 +302,7 @@ a.site-title img {
 #search-team {
 /*	text-transform: uppercase;*/
 	width: 300px;
-	font-size: 30px; 
+	font-size: 28px; 
 /*	color: black;*/
 /*	border: 1px solid #eee;*/
 }

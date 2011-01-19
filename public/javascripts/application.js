@@ -16,18 +16,20 @@ $(document).ready(function() {
 			cb(teams);
 		},
 		select: function(e, ui) {
-			$('#venue-search-results').empty();
-			$(this).blur().closest('#venue-search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
 			ui.item.the ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
-			$.getJSON('/venues/search.js?' + $.param($(this).closest('#venue-search-form').data()) + '&callback=?', function(results) {
-				if (results.length > 0) {
-					_.each(results, function(r) {
-						$('#venue-search-results').append(_.template($('.template#venues-show').html(), { "show": r }));
-					});
-				} else {
-					$('#venue-search-results').append('<li class="no-results">No results</li>');
-				}
-			});
+			document.location.href = ui.item.permalink;
+			// $('#venue-search-results').empty();
+			// $(this).blur().closest('#venue-search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
+			// ui.item.the ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
+			// $.getJSON('/venues/search.js?' + $.param($(this).closest('#venue-search-form').data()) + '&callback=?', function(results) {
+			// 	if (results.length > 0) {
+			// 		_.each(results, function(r) {
+			// 			$('#venue-search-results').append(_.template($('.template#venues-show').html(), { "show": r }));
+			// 		});
+			// 	} else {
+			// 		$('#venue-search-results').append('<li class="no-results">No results</li>');
+			// 	}
+			// });
 		}
 	});
 	
@@ -54,7 +56,7 @@ $(document).ready(function() {
 		});
 	});
 	
-	$('#venue-search-name').autocomplete({
+	$('#venue-search-name').focus().autocomplete({
 		source: function(r, cb) {
 			$.ajax({
 				url: "http://query.yahooapis.com/v1/public/yql",
