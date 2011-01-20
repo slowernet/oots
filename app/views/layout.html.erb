@@ -40,7 +40,7 @@
 
 <body>
 	<div id="page-header">
-		<a href="/" class="site-title">Out of Town Sports</a>
+		<a href="/" class="site-title">Out of Town Sports <span style="color: #999; font-size: 70%;">alpha</a></a>
 	</div>
 	
 	<div id="page-body">
@@ -61,13 +61,14 @@
 			</ul>
 			<ul>
 				<li><a href="http://twitter.com/outoftownsports" target="_blank">Twitter</a></li>
-			</ul>
-			<ul>
 				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
 					<div id="mailing-list-signup" style="display: none;">
 						<%= partial :'meta/mailinglist' %>
 					</div>
 				</li>
+			</ul>
+			<ul>
+				<li><div style="padding-right: 1em; color: #777;">This is an alpha release. Thanks for your patience while we get everything working. <a href="http://twitter.com/outoftownsports" target="_blank">Follow us on Twitter</a> for updates.</div></li>
 			</ul>
 			<div style="clear: both;"> </div>
 		</div>
