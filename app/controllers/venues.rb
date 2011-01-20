@@ -43,7 +43,7 @@ post '/venues' do
 	redirect venue.permalink
 end
 
-get "/venues" do
+get '/venues' do
 	redirect '/' unless (request.cookies['admin'] == CONFIG['secret'])
 	@venues = Venue.all(:order => 'country, state, city, name')
 	erb :'venues/index'

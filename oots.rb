@@ -1,3 +1,6 @@
+gem 'sinatra', '= 1.0'
+gem 'sinatra-respond_to', '= 0.5'
+
 begin
 	require 'sinatra'
 rescue LoadError
@@ -20,6 +23,9 @@ require 'mongo_mapper'
 # $IPINFODB_API_KEY = '0c3dfc109da55ad6220ba55e2baaf44af5da8469ee19bb4be59820917acf8fa1'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
+set :logger_level, :info if development?
+set :dump_errors, true if development?
+enable :raise_errors
 
 Dir.glob("lib/**/*.rb") { |f| load f }
 
