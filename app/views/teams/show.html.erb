@@ -5,6 +5,13 @@
 <% content_for :page_body do %>
 	<h1><%= @team.name %></h1>
 	
+	<% unless @venues.blank? %>
+		<br />
+		<h2>All venues</h2>
+		<%= partial :'venues/show', :collection => @venues %>
+		<br /><br />
+	<% end %>
+	
 	<h2>Shortcut links</h2>
 	<ul>
 		<% City.where().order(:population.desc).all.each do |c| %>

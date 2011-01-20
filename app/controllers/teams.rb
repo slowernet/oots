@@ -17,6 +17,7 @@ end
 
 get '/:slug' do
 	pass unless @team = Team.find_by_slug(params[:slug])
+	@venues = Venue.where('bonds.team_id' => @team.id).all
 	erb :'teams/show'
 end
 
