@@ -9,11 +9,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"> -->
 	
+	<%= stylesheet_link_tag "/stylesheets/public.css", 
+		"/stylesheets/custom-theme/jquery-ui.css", 
+		:cache => "/stylesheets/_bundle.css",
+		:compress => true
+	%>
+
 	<meta name="description" content="<%= pt = yield_content(:page_title); (pt.blank? ? "" : "#{pt.strip}. ") %>Out of Town Sports (OOTS) is a directory of bars that ." />
 	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, where to watch, nfl sunday ticket, mlb extra innings, red zone, out of town fans, nfl, mlb, nba, nhl, soccer, football, baseball, hockey, basketball, directory" />
 	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
 	<link rel="canonical" href="<%= "#{CONFIG['base_url']}#{request.path_info}" %>" />
-	
+
 	<script src="/javascripts/head.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		head.js(
@@ -24,15 +30,11 @@
 			"/javascripts/jquery/jquery.elastic.js",
 			"/javascripts/jquery/jquery.qtip.js",
 			"/javascripts/underscore.js",
-			"/javascripts/application.js"
+			"/javascripts/app/application.js",
+			"/javascripts/app/teams.js",
+			"/javascripts/app/venues.js"
 		);
 	</script>
-
-	<%= stylesheet_link_tag "/stylesheets/public.css", 
-		"/stylesheets/custom-theme/jquery-ui.css", 
-		:cache => "/stylesheets/_bundle.css",
-		:compress => true
-	%>
 
 	<%= yield_content :page_head %>
 </head>
@@ -82,7 +84,8 @@
 	<%= yield_content :page_end %>
 
 	<div class="templates" style="display: none;">
-		<%= include_templates(settings.root + '/app/views') %>
+		<%= include_templates(settings.root + '/app/views/teams') %>
+		<%= include_templates(settings.root + '/app/views/venues') %>
 	</div>
 	
 	<script type="text/javascript" charset="utf-8">

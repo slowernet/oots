@@ -270,18 +270,19 @@ input[type=text]:focus, textarea:focus {
 
 #page-body {
 	width: 759px;
-	min-height: 400px;
-	margin: 0 auto 60px;
-	padding: 48px 0 0 0;
+	min-height: 220px;
+	margin: 0 auto 45px;
+	padding: 38px 0 0 0;
 }
 
 #page-footer {
-/*	border-top: 1px solid #ddd;*/
 /*	background-color: #f6f6f6;*/
-	padding: 15px 0px;
+/*	padding: 15px 0px;*/
 }
 
 #page-footer>div {
+	border-top: 1px solid #ddd;
+	padding: 15px 0;
 	margin: 0 auto;
 	width: 759px;
 }
@@ -293,9 +294,13 @@ input[type=text]:focus, textarea:focus {
 }
 
 #venue-search-form {
-	padding-top: 8px;
+	padding-top: 58px;
 /*	color: #666;*/
 	font-size: 28px;
+}
+
+#venue-search-results {
+	padding-top: 1.2em;
 }
 
 #venue-search-results li {
