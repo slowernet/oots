@@ -52,7 +52,7 @@ get '/teams/:slug' do
 end
 
 get '/:team_slug/in/:city_slug' do
-	team = Team.where(:name => Regexp.new(params[:team_slug], 'i')).first	# legacy
+	team = Team.where(:slug => Regexp.new(params[:team_slug], 'i')).first	# legacy
 	redirect "#{team.slug}/#{params[:city_slug].sub(/-us$/, '')}", 301
 end
 
