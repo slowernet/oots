@@ -203,7 +203,7 @@ input[type=text]:focus, textarea:focus {
 	left: 20px;
 	height: 24px;
 	width: 24px;
-	background: white url(/images/spinner.gif) no-repeat 50% 50%;
+/*	background: white url(/images/spinner.gif) no-repeat 50% 50%;*/
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px; 
@@ -317,9 +317,9 @@ input[type=text]:focus, textarea:focus {
 }
 
 #search-team {
-/*	text-transform: uppercase;*/
 	width: 300px;
 	font-size: 28px; 
+/*	text-transform: uppercase;*/
 /*	color: black;*/
 /*	border: 1px solid #eee;*/
 }
