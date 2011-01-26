@@ -53,51 +53,5 @@ configure do
 end
 
 Dir[File.join(File.dirname(__FILE__), "app", "models", "*.rb")].each { |file| require file }
-
-# require 'app/helpers'
-
-#####################
-
-def format_phone(p)
-	p.gsub!(/\D/,'')
-	"#{p[0..2]} #{p[3..5]} #{p[6..9]}"
-end
-
-def teams_for_select
-	Team.all(:order => 'name').map { |t| { 
-		:id => t.id, 
-		:label => t.name, 
-		:altnames => t.altnames, 
-		:the => t.the,
-		:permalink => t.permalink
-	}}
-end
-
-get '/' do
-	# @teams = CACHE.fetch("teams") do
-	# end
-	@teams = teams_for_select
-	erb :'venues/search'
-end
-
-get '/about' do
-	erb :'meta/about'
-end
-
-get '/sitemap' do
-	respond_to do |wants|
-		wants.xml {
-			@venues = Venue.all
-			@cities = City.all
-			@teams = Team.all
-			erb :'meta/sitemap'
-		}
-	end
-end
-
-get "/#{CONFIG['secret']}" do
-	response.set_cookie('admin', CONFIG['secret']);
-	redirect '/'
-end
-
+Dir[File.join(File.dirname(__FILE__), "app", "helpers", "*.rb")].each { |file| require file }
 Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |file| require file }
