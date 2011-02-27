@@ -8,38 +8,6 @@ $(document).ready(function() {
 	
 	// venue search /////////////////////////////////////////
 	// $('#geolocation-permission').qtip('api').destroy();
-	
-	$('#search-team').focus().autocomplete({
-		delay: 0,
-		source: function(r, cb) {
-			var teams = _.select($('#search-team').data('teams'), function(team) {
-				return (team.label + " " + (team.altnames == null ? '' : team.altnames)).match(new RegExp(r.term, 'i')) != null; 
-			});
-			cb(teams);
-		},
-		select: function(e, ui) {
-			ui.item.the ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
-			// document.location.href = ui.item.permalink;
-			$('#venue-search-results').empty();
-			$('#venue-search-form').animate({
-				paddingTop: '0px'
-			}, {
-				duration: 92
-			});
-			$(this).blur().closest('#venue-search-form').data('team_id', ui.item.id).data('team_name', ui.item.label);
-			ui.item.the ? $('#search-team-definite-article').show() : $('#search-team-definite-article').hide();
-			$.getJSON('/venues/search.js?' + $.param($(this).closest('#venue-search-form').data()) + '&callback=?', function(results) {
-				if (results.length > 0) {
-					_.each(results, function(r) {
-						$('#venue-search-results').append(_.template($('.template#venues-show').html(), { "show": r }));
-					});
-				} else {
-					$('#venue-search-results').append('<li class="no-results">No results</li>');
-				}
-			});
-		}
-	});
-	
 	// if ((c = $.cookies.get('search-city')) && c.lat) {
 		// $('#search-city').html(c.city).addClass('preliminary').closest('#venue-search-form').data('city', c.city).data('lat', c.lat).data('lon', c.lon);
 	// }
@@ -110,8 +78,11 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#location-set-trigger').click(function() {
-		$(this).html($('#location-edit').html());
+	$('#location a').click(function() {
+		$(this).replaceWith($("<input type='text'>").blur(function(e) {
+			console.log(e);
+		}));
+		return false;
 		// $('#location-edit').show();
 	});
 	

@@ -20,17 +20,17 @@
 	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
 	<link rel="canonical" href="<%= "#{CONFIG['base_url']}#{request.path_info}" %>" />
 
-	<script src="/javascripts/head.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://ajax.cdnjs.com/ajax/libs/headjs/0.9/head.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		head.js(
-			"http://code.jquery.com/jquery-1.5rc1.js",
-			// "http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js", 
-			"/javascripts/jquery/jquery-ui-1.8.8.custom.min.js",
+			// "http://code.jquery.com/jquery-1.5rc1.js",
+			"http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js", 
+			"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js",
+			"http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js",
 			"/javascripts/jquery/jquery.tools.overlay.js",
 			"/javascripts/jquery/jquery.storage.js",
 			"/javascripts/jquery/jquery.elastic.js",
 			"/javascripts/jquery/jquery.qtip.js",
-			"/javascripts/underscore.js",
 			"/javascripts/app/application.js",
 			"/javascripts/app/teams.js",
 			"/javascripts/app/venues.js"
@@ -43,11 +43,9 @@
 <body>
 	<div id="page-header">
 		<a class="site-logo" href="/" class="site-title">Out of Town Sports <span style="color: #999; font-size: 17px;">alpha</a></a>
-		<div id="location"></div>
-		<div id="location-edit" style="display: none;">
-		</div>
+		<div id="location"><a href='#'>Set your location</a></div>
 	</div>
-	
+
 	<div id="page-body">
 		<%= yield_content :page_body %>
 	</div>
@@ -58,7 +56,7 @@
 				<li><a href="/">OOTS home</a></li>
 				<li><a href="/about">About</a></li>
 				<% if (request.cookies['admin'] == CONFIG['secret']) %>
-				<li><a href="/venues">Venues</a></li>
+					<li><a href="/venues">Venues</a></li>
 					<li><a href="/venues/new">New venue</a></li>
 					<li><a href='/teams'>Teams</a></li>
 					<li><a href="/teams/new">New team</a></li>

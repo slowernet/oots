@@ -34,7 +34,6 @@ class Team
 	end
 	
 	def permalink
-		# "/t/#{slug}"
 		"/#{slug}"
 	end
 

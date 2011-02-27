@@ -236,12 +236,22 @@ input[type=text]:focus, textarea:focus {
 	font-size: 1.5em;
 }
 
+#page-header #location a:hover {
+	text-decoration: underline;
+}
+
 #page-header #location {
 	position: absolute;
-	top: 32px;
+	top: 38px;
 	right: 8px;
 	font-size: 13px;
-	color: #999;
+	color: #888;
+/*	padding: 2px 4px;*/
+}
+
+#page-header #location input[type=text] {
+	border: 1px inset #aaa;
+	font-size: 13px;
 }
 
 #page-header #location #location-edit {
