@@ -43,7 +43,7 @@
 <body>
 	<div id="page-header">
 		<a class="site-logo" href="/" class="site-title">Out of Town Sports <span style="color: #999; font-size: 17px;">alpha</a></a>
-		<div id="location"><a href='#'>Set your location</a></div>
+		<!-- <div id="location"><a href='#'>Set your location</a></div> -->
 	</div>
 
 	<div id="page-body">
@@ -86,17 +86,6 @@
 		<%= include_templates(settings.root + '/app/views/teams') %>
 		<%= include_templates(settings.root + '/app/views/venues') %>
 	</div>
-	
-	<script type="text/javascript">
-		(function() {
-			var t = document.createElement('script');
-			t.type = 'text/javascript'; t.async = true; t.id = 'gauges-tracker';
-			t.setAttribute('data-site-id', '4d6d6a7c4b4b841f88000024');
-			t.src = 'http://track.gaug.es/track.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(t, s);
-		})();
-	</script>
 	
 	<script type="text/javascript" charset="utf-8">
 		var _gaq = _gaq || [];

@@ -47,8 +47,7 @@ table {
 
 /*********************************************/
 
-html {
-	min-height: 100%;
+html { overflow-y: scroll; min-height: 100%;
 }
 
 @font-face {
