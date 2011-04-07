@@ -1,5 +1,4 @@
-gem 'sinatra', '= 1.0'
-gem 'sinatra-respond_to', '= 0.5'
+# oots
 
 begin
 	require 'sinatra'
@@ -17,10 +16,6 @@ require 'mongo_mapper'
 # require 'joint'
 # require 'open-uri'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
-
-
-# http://ipinfodb.com/ip_location_api.php
-# $IPINFODB_API_KEY = '0c3dfc109da55ad6220ba55e2baaf44af5da8469ee19bb4be59820917acf8fa1'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
 set :logger_level, :info if development?
