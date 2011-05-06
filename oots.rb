@@ -7,6 +7,10 @@ rescue LoadError
 	require 'sinatra'
 end
 
+gem 'sinatra', '>= 1.2'
+gem 'mongo_mapper', '< 0.9'
+gem 'activesupport', '< 3.0'
+
 require 'active_support'; $KCODE = 'u'
 require 'sinatra_more/markup_plugin' # http://github.com/nesquena/sinatra_more
 require 'sinatra_more/render_plugin'
