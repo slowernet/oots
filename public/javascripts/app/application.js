@@ -94,6 +94,7 @@ $(document).ready(function() {
 		}
 		return false;		
 	})
+	
 	// ul.select /////////////////////////////////////////
 
 	// open on click selected, close on reclick
