@@ -1,3 +1,4 @@
-require 'oots'
-disable :run
+require 'bundler'
+Bundler.require
+require './oots'
 run Sinatra::Application

@@ -6,3 +6,4 @@ public/*/_bundle.*
 tmp/*
 config.json
 Capfile
+vendor/*
