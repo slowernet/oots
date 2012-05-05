@@ -7,6 +7,7 @@ require 'sinatra_more/markup_plugin' # http://github.com/nesquena/sinatra_more
 require 'sinatra_more/render_plugin'
 require 'sinatra/respond_to' # http://github.com/cehoffman/sinatra-respond_to
 require 'mongo_mapper'
+# require 'oj'
 # require 'bin'
 # require 'joint'
 # require 'open-uri'
@@ -17,7 +18,8 @@ set :logger_level, :info if development?
 set :dump_errors, true if development?
 enable :raise_errors
 
-Dir.glob("lib/**/*.rb") { |f| load f }
+%w(lib config).each { |path| Dir.glob("#{path}/**{,/*/**}/*.rb") { |f| load f } }
+CONFIG = CONFIG['default'].recursive_merge(CONFIG[Sinatra::Application.environment.to_s])
 
 module Sinatra
 	register SinatraMore::MarkupPlugin
@@ -28,7 +30,8 @@ end
 use Rack::JSONP
 
 configure do
-	CONFIG = JSON.parse(IO.read("#{File.dirname(__FILE__)}/config.json")).select { |k,v| ['default', Sinatra::Application.environment.to_s].include?(k) }.map { |a| a.last }.inject({}) { |m,e| m.merge(e) }	
+	
+	# CONFIG = Oj::Doc.parse(IO.read("#{File.dirname(__FILE__)}/config.json")).select { |k,v| ['default', Sinatra::Application.environment.to_s].include?(k) }.map { |a| a.last }.inject({}) { |m,e| m.merge(e) }	
 
 	MongoMapper.connection = Mongo::Connection.new(CONFIG['db']['host'], CONFIG['db']['port'])
 	MongoMapper.database = CONFIG['db']['name']
@@ -42,6 +45,4 @@ configure do
 	helpers TemplateBundler::ViewHelper
 end
 
-Dir[File.join(File.dirname(__FILE__), "app", "models", "*.rb")].each { |file| require file }
-Dir[File.join(File.dirname(__FILE__), "app", "helpers", "*.rb")].each { |file| require file }
-Dir[File.join(File.dirname(__FILE__), "app", "controllers", "*.rb")].each { |file| require file }
+%w(models controllers helpers).each { |path| Dir[File.join(File.dirname(__FILE__), "app", path, "*.rb")].each { |f| require f } }

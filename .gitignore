@@ -1,9 +1,9 @@
 .DS_Store
 *.log
 *.tmp
-.DS_Store
+.bundle
 public/*/_bundle.*
 tmp/*
-config.json
+config.rb
 Capfile
 vendor/*

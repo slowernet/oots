@@ -1,6 +1,6 @@
 require 'asset_timestamps_cache'
 require 'fileutils'
-require 'httparty'
+require 'curb'
 require 'cssmin'
 
 module AssetBundler
@@ -66,12 +66,12 @@ module AssetBundler
 		# modified by ES
 		if compress
 			if asset_paths.first.match(/\.js$/)
-				contents = HTTParty.post('http://closure-compiler.appspot.com/compile', :body => { 
+				contents = Curl.post('http://closure-compiler.appspot.com/compile', { 
 					:js_code => contents, 
 					:compilation_level => 'SIMPLE_OPTIMIZATIONS', 
 					:output_format => 'text',
 					:output_info => 'compiled_code'
-				})
+				}).body_str
 			elsif asset_paths.first.match(/\.css$/)
 				contents = CSSMin.minify(contents)
 			end
