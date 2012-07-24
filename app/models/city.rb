@@ -2,7 +2,10 @@ class City < Ohm::Model
 
 	attribute :name
 	attribute :state
-	
+	attribute :country
+	attribute :radius
+	attribute :population
+
 	# key :name, String, :required => true
 	# key :slug, String, :required => true, :unique => true
 	# key :state, String

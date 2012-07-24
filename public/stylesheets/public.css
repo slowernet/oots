@@ -1,3 +1,110 @@
+/*!
+ * Bootstrap v2.0.4
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]) {
+  display: none;
+}
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+a:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+a:hover,
+a:active {
+  outline: 0;
+}
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+#map_canvas img {
+  max-width: none;
+}
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  font-size: 100%;
+  vertical-align: middle;
+}
+button,
+input {
+  *overflow: visible;
+  line-height: normal;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
 /*********************************************/
 /* reset */
 html, body, div, span, applet, object, iframe,
@@ -16,52 +123,23 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-size: 100%;
 	background: transparent;
 }
-body {
-	line-height: 1;
-}
 ol, ul {
 	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-
-/* remember to define focus styles! */
-:focus {
-	outline: 0;
-}
-
-/* remember to highlight inserts somehow! */
-ins {
-	text-decoration: none;
-}
-del {
-	text-decoration: line-through;
-}
-
-/* tables still need 'cellspacing="0"' in the markup */
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
 }
 
 /*********************************************/
 
-html { overflow-y: scroll; min-height: 100%;
+html { overflow-y: scroll; min-height: 100%; }
+
+body,
+button,
+input,
+select,
+textarea {
+	font-family: "Droid Sans", sans-serif;
 }
 
-/*@font-face {
-	font-family: 'CalibriRegular';
-	src: url('/stylesheets/fonts/calibri-webfont.eot');
-	src: local('☺'), url('/stylesheets/fonts/calibri-webfont.woff') format('woff'), 
-		url('/stylesheets/fonts/calibri-webfont.ttf') format('truetype'), 
-		url('/stylesheets/fonts/calibri-webfont.svg#webfontdApeVMI5') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-*/
 body {
-	font-family: 'CalibriRegular';
 	padding: 0;
 	margin: 0;
 	background: -webkit-gradient(linear, left top, left 30, from(#fff), color-stop(6%, #eee), to(#fff));
@@ -76,7 +154,7 @@ a {
 }
 
 h1 {
-	font-size: 25pt;
+	font-size: 23pt;
 	margin-bottom: 14pt;
 }
 
@@ -111,7 +189,6 @@ img.defer {
 
 input[type=text], 
 textarea {
-	font-family: 'CalibriRegular';
 	padding: 3px 4px 0px 4px;
 /*	border: solid 1px #e4e4e4;*/
 	outline: 0;
@@ -231,8 +308,13 @@ input[type=text]:focus, textarea:focus {
 	position: absolute;
 	left: 0px;
 	top: 29px;
-	color: #a44;
+/*	color: #a44;*/
+	color: #999;
 	font-size: 1.5em;
+}
+
+#page-header a.site-logo:hover {
+	color: red;
 }
 
 #page-header #location a:hover {
@@ -365,7 +447,6 @@ input[type=text]:focus, textarea:focus {
 #venue-edit input[type=text],
 #venue-pre-edit-search input[type=text],
 #team-edit input[type=text] {
-	font-family: 'CalibriRegular';
 	font-size: 20px;
 	width: 500px;
 }
@@ -375,7 +456,6 @@ input[type=text]:focus, textarea:focus {
 }
 
 #mc_embed_signup input[type=text] {
-	font-family: 'CalibriRegular';
 	font-size: 16px;
 }
 

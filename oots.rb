@@ -5,11 +5,12 @@ require 'ohm'
 require 'ohm/contrib'
 require 'sinatra/reloader' if development?
 require 'oj'
-
-# require 'active_support'; $KCODE = 'u'
+require 'geohash'
+require 'base32/crockford'
 require 'sinatra_more/markup_plugin' # http://github.com/nesquena/sinatra_more
 require 'sinatra_more/render_plugin'
 require 'sinatra/respond_to' # http://github.com/cehoffman/sinatra-respond_to
+# require 'active_support'; $KCODE = 'u'
 # require 'mongo_mapper'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
 
@@ -30,7 +31,7 @@ configure do
 	set :logger_level, :info if development?
 	set :dump_errors, true if development?
 
-	Ohm.connect
+	Ohm.connect(:url => $config[:redis])
 	# MongoMapper.connection = Mongo::Connection.new(CONFIG['db']['host'], CONFIG['db']['port'])
 	# MongoMapper.database = CONFIG['db']['name']
 	# MongoMapper.handle_passenger_forking
