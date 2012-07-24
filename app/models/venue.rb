@@ -1,45 +1,51 @@
-class Bond
-	include MongoMapper::EmbeddedDocument
+# class Bond
+# 	include MongoMapper::EmbeddedDocument
+# 
+# 	key :team_id, ObjectId
+# 	belongs_to :team
+# 	key :strength, Integer
+# 	key :note, String
+# end
 
-	key :team_id, ObjectId
-	belongs_to :team
-	key :strength, Integer
-	key :note, String
-end
-
-class Venue
-	include MongoMapper::Document
-	plugin MongoMapper::Plugins::IdentityMap
+class Venue < Ohm::Model
+	# include MongoMapper::Document
+	# plugin MongoMapper::Plugins::IdentityMap
 	
-	key :name, String, :required => true
-	key :slug, String, :required => true, :unique => true
-	many :bonds
-	key :address, String
-	key :city, String
-	key :state, String
-	key :zip, String
-	key :crossstreet, String
-	key :latlon, Array
-	key :phone, String
-	key :foursquare_id, Integer, :unique => true
-	key :url, String
-	key :twitter, String
-	timestamps!
-
-	attr_accessor :lat, :lon
-
-	ensure_index [[ 'latlon', '2d' ]]	
+	attribute :name
+	attribute :address
+	attribute :city
+	attribute :state
+	attribute :foursquare_id
 	
-	before_validation do |venue|
-		venue.slug = "#{venue.name} #{venue.address} #{venue.city}".dasherize
-	end
+	# key :name, String, :required => true
+	# key :slug, String, :required => true, :unique => true
+	# many :bonds
+	# key :address, String
+	# key :city, String
+	# key :state, String
+	# key :zip, String
+	# key :crossstreet, String
+	# key :latlon, Array
+	# key :phone, String
+	# key :foursquare_id, Integer, :unique => true
+	# key :url, String
+	# key :twitter, String
+	# timestamps!
+	# 
+	# attr_accessor :lat, :lon
+	# 
+	# ensure_index [[ 'latlon', '2d' ]]	
+	
+	# before_validation do |venue|
+	# 	venue.slug = "#{venue.name} #{venue.address} #{venue.city}".dasherize
+	# end
 
-	def permalink
-		"/venues/#{slug}"
-	end
+	# def permalink
+	# 	"/venues/#{slug}"
+	# end
 
-	def self.count_for_team(team)
-		Venue.where('bonds.team_id' => team.id).count
-	end
+	# def self.count_for_team(team)
+	# 	Venue.where('bonds.team_id' => team.id).count
+	# end
 	
 end

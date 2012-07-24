@@ -50,7 +50,7 @@ table {
 html { overflow-y: scroll; min-height: 100%;
 }
 
-@font-face {
+/*@font-face {
 	font-family: 'CalibriRegular';
 	src: url('/stylesheets/fonts/calibri-webfont.eot');
 	src: local('☺'), url('/stylesheets/fonts/calibri-webfont.woff') format('woff'), 
@@ -59,7 +59,7 @@ html { overflow-y: scroll; min-height: 100%;
 	font-weight: normal;
 	font-style: normal;
 }
-
+*/
 body {
 	font-family: 'CalibriRegular';
 	padding: 0;

@@ -1,7 +1,7 @@
 <% content_for :page_body do %>
-	<div id="venue-search-form">
+	<div class="well" id="venue-search-form">
 		I'm looking for a place to watch <span id="search-team-definite-article">the </span>
-		<input id="search-team" type="text" placeholder="team name" autofocus data-teams='<%= @teams.to_json %>'>
+		<input id="search-team" type="text" placeholder="team name" autofocus data-teams='<%= Oj.dump(@teams) %>'>
 	</div>
 	
 	<ul id="venue-search-results"></ul>
