@@ -19,6 +19,6 @@
 		<% end %>
 	</ul>
 
-	<% if (request.cookies['admin'] == CONFIG['secret']) %><a href="/teams/<%= @team.slug %>/edit" style="padding: 1em 0; display: block;">edit</a><% end %>
+	<% if (request.cookies['admin'] == $config[:secret]) %><a href="/teams/<%= @team.slug %>/edit" style="padding: 1em 0; display: block;">edit</a><% end %>
 	
 <% end %>

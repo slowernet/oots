@@ -9,7 +9,7 @@ get '/teams' do
 end
 
 get '/teams/new' do
-	redirect '/' unless (request.cookies['admin'] == CONFIG['secret'])
+	redirect '/' unless (request.cookies['admin'] == $config[:secret])
 	@form = { :method => 'post', :endpoint => '/teams' }
 	@team = Team.new
 	erb :'teams/edit'

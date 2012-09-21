@@ -44,7 +44,7 @@ post '/venues' do
 end
 
 get '/venues' do
-	redirect '/' unless (request.cookies['admin'] == CONFIG['secret'])
+	redirect '/' unless (request.cookies['admin'] == $config[:secret])
 	@venues = Venue.all(:order => 'country, state, city, name')
 	erb :'venues/index'
 end
