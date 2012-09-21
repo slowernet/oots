@@ -1,7 +1,6 @@
 <% content_for :page_body do %>
-	<div class="well" id="venue-search-form">
-		I'm looking for a place to watch <span id="search-team-definite-article">the </span>
-		<input id="search-team" type="text" placeholder="team name" autofocus data-teams='<%= Oj.dump(@teams) %>'>
+	<div id="venue-search-form">
+		<input class="soulmate" type="text" placeholder="I'm looking for a place to watch" autofocus data-teams='<%= Oj.dump(@teams) %>'>
 	</div>
 	
 	<ul id="venue-search-results"></ul>

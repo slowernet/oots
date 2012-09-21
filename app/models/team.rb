@@ -5,6 +5,7 @@ class Team < Ohm::Model
 	attribute :name
 	attribute :the
 	attribute :sport
+	attribute :country
 	include Ohm::Timestamps
 	
 	# key :name, String, :required => true

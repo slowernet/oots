@@ -4,6 +4,23 @@ $(document).ready(function() {
 		this.src = $(this).data('src');
 	});
 	
+	$('.soulmate').soulmate({
+		url: 'http://seatgeek.com/autocomplete',
+		types: ['teamband', 'event', 'venue', 'tournament'],
+		renderCallback: function(term, data, type) {
+			var rv = term;
+			if (data.subtitle) rv += "<div style='font-size: 10px; text-transform: uppercase; font-weight: 700; color: #888;'>" + data.subtitle + "</div>";
+			return rv;
+		},
+		selectCallback: function(term, data, type) {
+			console.log($.extend(data, { term: term }));
+			return term;
+		},
+		minQueryLength: 2,
+		maxResults: 3
+	}).focus();
+	
+	
 	// $('#location').html($.cookies.get('search-city'));
 	
 	// venue search /////////////////////////////////////////
@@ -31,52 +48,52 @@ $(document).ready(function() {
 		});
 	});
 	
-	$('#venue-search-name').focus().autocomplete({
-		source: function(r, cb) {
-			$.ajax({
-				url: "http://query.yahooapis.com/v1/public/yql",
-				dataType: "jsonp",
-				data: {
-					q: 'select * from foursquare.venues where q="' + r.term + '" and geolat="' + $('#venue-search-name').closest('.form').data('lat') + '" and geolong="' + $('#venue-search-name').closest('.form').data('lon') + '"',
-					env: 'store://datatables.org/alltableswithkeys',
-					format: 'json',
-					callback: '?'
-				},
-				success: function(d) {
-					// massage inconsistently structured 4sq API results
-					var venues = d.query.results.venues;
-					venues = _.isArray(venues.group) ? venues.group : Array(venues.group);
-					venues = _.select(venues, function(g) { return(g.type == 'Matching Places'); } ).shift().venue; 
-					venues = _.isArray(venues) ? venues : Array(venues);
-					$('#venue-search-name').data('venues', venues);
-					venues = _.map(venues, function(v) { return { label: v.name + " @ " + v.address, id: v.id, distance: parseInt(v.distance) } }).sort(function(a,b) { return((a.distance < b.distance) ? -1 : 1); });
-					cb(venues); 
-				}
-			});
-		},
-		delay: 500,
-		minLength: 2,
-		select: function(e, ui) {
-			var venue = _.select($('#venue-search-name').data('venues'), function(v) { return (v.id == ui.item.id); }).shift();
-
-			// check whether we have this venue already
-			$.getJSON('/venues/search.js', { foursquare_id: venue.id }, function(d) {
-				// console.log(d);
-				if (d.length > 0) { document.location.href = '/venues/f/' + venue.id; }
-			});
-			
-			$('#venue-pre-edit-search').hide();
-			$('#venue-edit').fadeIn();
-			
-			$('#venue_name').val(venue['name']);
-			$.each(['address', 'city', 'state', 'zip', 'crossstreet', 'phone', 'twitter'], function(i, v) {
-				jQuery('#venue_' + v).val(venue[v]);
-			});
-			$('#venue_lat').val(venue['geolat']);
-			$('#venue_lon').val(venue['geolong']);
-			jQuery('#venue_foursquare_id').val(venue['id']);
-		}
-	});
+	// $('#venue-search-name').focus().autocomplete({
+	// 	source: function(r, cb) {
+	// 		$.ajax({
+	// 			url: "http://query.yahooapis.com/v1/public/yql",
+	// 			dataType: "jsonp",
+	// 			data: {
+	// 				q: 'select * from foursquare.venues where q="' + r.term + '" and geolat="' + $('#venue-search-name').closest('.form').data('lat') + '" and geolong="' + $('#venue-search-name').closest('.form').data('lon') + '"',
+	// 				env: 'store://datatables.org/alltableswithkeys',
+	// 				format: 'json',
+	// 				callback: '?'
+	// 			},
+	// 			success: function(d) {
+	// 				// massage inconsistently structured 4sq API results
+	// 				var venues = d.query.results.venues;
+	// 				venues = _.isArray(venues.group) ? venues.group : Array(venues.group);
+	// 				venues = _.select(venues, function(g) { return(g.type == 'Matching Places'); } ).shift().venue; 
+	// 				venues = _.isArray(venues) ? venues : Array(venues);
+	// 				$('#venue-search-name').data('venues', venues);
+	// 				venues = _.map(venues, function(v) { return { label: v.name + " @ " + v.address, id: v.id, distance: parseInt(v.distance) } }).sort(function(a,b) { return((a.distance < b.distance) ? -1 : 1); });
+	// 				cb(venues); 
+	// 			}
+	// 		});
+	// 	},
+	// 	delay: 500,
+	// 	minLength: 2,
+	// 	select: function(e, ui) {
+	// 		var venue = _.select($('#venue-search-name').data('venues'), function(v) { return (v.id == ui.item.id); }).shift();
+	// 
+	// 		// check whether we have this venue already
+	// 		$.getJSON('/venues/search.js', { foursquare_id: venue.id }, function(d) {
+	// 			// console.log(d);
+	// 			if (d.length > 0) { document.location.href = '/venues/f/' + venue.id; }
+	// 		});
+	// 		
+	// 		$('#venue-pre-edit-search').hide();
+	// 		$('#venue-edit').fadeIn();
+	// 		
+	// 		$('#venue_name').val(venue['name']);
+	// 		$.each(['address', 'city', 'state', 'zip', 'crossstreet', 'phone', 'twitter'], function(i, v) {
+	// 			jQuery('#venue_' + v).val(venue[v]);
+	// 		});
+	// 		$('#venue_lat').val(venue['geolat']);
+	// 		$('#venue_lon').val(venue['geolong']);
+	// 		jQuery('#venue_foursquare_id').val(venue['id']);
+	// 	}
+	// });
 
 	$('#location a').click(function() {
 		$(this).replaceWith($("<input type='text'>").blur(function(e) {
@@ -123,20 +140,20 @@ $(document).ready(function() {
 
 	// bond edit /////////////////////////////////////////
 
-	$('#bond-note').elastic();
+	// $('#bond-note').elastic();
 
-	$('#bond-team-name').autocomplete({
-		delay: 0,
-		source: function(r, cb) {
-			var teams = _.select($('#bond-team-name').data('teams'), function(team) {
-				return (team.label + " " + (team.altnames == null ? '' : team.altnames)).match(new RegExp(r.term, 'i')) != null; 
-			});
-			cb(teams);
-		},
-		select: function(e, ui) {
-			$(this).data('team_id', ui.item.id);
-		}		
-	});
+	// $('#bond-team-name').autocomplete({
+	// 	delay: 0,
+	// 	source: function(r, cb) {
+	// 		var teams = _.select($('#bond-team-name').data('teams'), function(team) {
+	// 			return (team.label + " " + (team.altnames == null ? '' : team.altnames)).match(new RegExp(r.term, 'i')) != null; 
+	// 		});
+	// 		cb(teams);
+	// 	},
+	// 	select: function(e, ui) {
+	// 		$(this).data('team_id', ui.item.id);
+	// 	}		
+	// });
 
 	// package up our fancy form elements
 	$('#add-bond').submit(function() {
