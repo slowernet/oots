@@ -1,8 +1,3 @@
 <% content_for :page_body do %>
-	<div id="venue-search-form">
-		<input class="soulmate" type="text" placeholder="I'm looking for a place to watch" autofocus data-teams='<%= Oj.dump(@teams) %>'>
-	</div>
-	
-	<ul id="venue-search-results"></ul>
-	
+	<input class="soulmate" type="text" placeholder="Search for teams, cities, or venues" autocomplete="off">
 <% end %>

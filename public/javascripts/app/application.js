@@ -4,20 +4,22 @@ $(document).ready(function() {
 		this.src = $(this).data('src');
 	});
 	
-	$('.soulmate').soulmate({
-		url: 'http://seatgeek.com/autocomplete',
-		types: ['teamband', 'event', 'venue', 'tournament'],
+	$('.soulmate:visible').soulmate({
+        // url: 'http://seatgeek.com/autocomplete',
+        url: $config.base_url + '/autocomplete/search',
+		types: ['team', 'venue', 'city'],
 		renderCallback: function(term, data, type) {
 			var rv = term;
-			if (data.subtitle) rv += "<div style='font-size: 10px; text-transform: uppercase; font-weight: 700; color: #888;'>" + data.subtitle + "</div>";
+			if (data.subtitle) rv += "<div class='subtitle'>" + data.subtitle + "</div>";
 			return rv;
 		},
 		selectCallback: function(term, data, type) {
-			console.log($.extend(data, { term: term }));
+            // console.log($.extend(data, { term: term }));
+            document.location.href = data.url;
 			return term;
 		},
 		minQueryLength: 2,
-		maxResults: 3
+		maxResults: 5
 	}).focus();
 	
 	

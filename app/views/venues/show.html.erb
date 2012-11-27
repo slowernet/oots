@@ -9,7 +9,7 @@
 		<ul style="position: absolute; top: 0; left: 0; margin: 0; font-size: 19px">
 			<li><%= @venue.address %></li>
 			<li><%= @venue.city %> <%= @venue.state %> <%= @venue.zip %></li>
-			<li><a href="tel:+1<%= @venue.phone.gsub(/\D/,'') %>"><%= format_phone @venue.phone %></a></li>
+			<li><a href="tel:+1<%= @venue.try(:phone).try(:gsub, /\D/,'') %>"><%= format_phone @venue.phone %></a></li>
 			<% unless @venue.foursquare_id.blank? %>
 				<li><a href="http://foursquare.com/venue/<%= @venue.foursquare_id %>" target="_blank"><img src="/images/foursquare-icon.png" height="20" width="20" border="0" style="vertical-align: text-top;"> foursquare</a></li>
 			<% end %>				
@@ -19,35 +19,4 @@
 			<li style="text-align: right;"><a href="http://maps.google.com/?q=<%= URI.escape "#{@venue.name}, #{@venue.address}, #{@venue.city} #{@venue.zip}" %>" target="_blank">big map</a></li>
 		</ul>
 	</div>
-	
-	<h2>Teams watched here</h2>
-	<ul>
-		<%  @venue.bonds.each do |bond| %>
-			<li>
-				<h3><a href="<%= bond.team.permalink %>"><%= bond.team.name %></a> [<%= bond.strength %>]</h3>
-			</li>
-		<% end %>
-		<br />
-	</ul>
-	
-	<% form_for(Bond.new, "#{@venue.permalink}/bonds", :method => 'post', :id => 'add-bond') do |f| %>
-		<div style="padding-bottom: 10px;">
-			<input type="text" id="bond-team-name" placeholder="Team name" data-teams='<%= @teams.to_json %>'>
-
-			games are
-		
-			<ul class="select" name="bond[strength]" style="display: inline-block;">
-				<li class="selected" data-strength="1"><a href="#">always</a></li>
-				<li class="" data-strength="2"><a href="#">usually</a></li>
-				<li class="" data-strength="3"><a href="#">occasionally</a></li>
-			</ul>
-
-			<div style="padding-left: 113px; display: inline-block;">shown here.</div>
-		</div>
-		
-		<textarea id="bond-note" name="bond[note]" placeholder="Additional information..."></textarea>
-		<br />
-
-		<%= submit_tag('Save', :class => 'rgbabutton large blue') %>
-	<% end %>
 <% end %>

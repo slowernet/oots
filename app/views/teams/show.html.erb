@@ -13,8 +13,8 @@
 	<% end %>
 	
 	<h2>Shortcut links</h2>
-	<ul>
-		<% City.where().order(:population.desc).all.each do |c| %>
+	<ul class="list">
+		<% City.all.sort(:by => :population, :order => "desc").each do |c| %>
 			<li><a href="<%= "#{@team.slug}/#{c.slug}" %>">Where to watch <%= @team.definite_name %> in <%= "#{c.name}, #{c.state}" %></a></li>
 		<% end %>
 	</ul>

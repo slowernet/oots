@@ -2,4 +2,9 @@ require 'bundler'
 Bundler.require
 
 require './oots'
-run Sinatra::Application
+require 'soulmate/server'
+
+run Rack::URLMap.new({ 
+    "/" => Sinatra::Application,
+	"/autocomplete" => Soulmate::Server
+})

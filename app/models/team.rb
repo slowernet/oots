@@ -1,12 +1,36 @@
 class Team < Ohm::Model
-	# include MongoMapper::Document
-	# plugin MongoMapper::Plugins::IdentityMap
 	
 	attribute :name
+	set :altnames, String
 	attribute :the
 	attribute :sport
+	attribute :league
+	attribute :city
 	attribute :country
+	attribute :altnames
+	attribute :slug; index :slug
 	include Ohm::Timestamps
+	include Ohm::Callbacks
+	
+	def before_save
+		self.slug = self.name.dasherize
+	end
+
+	def definite_name
+		(the.eql?('true') ? 'the ' : '') + name
+	end
+
+	def permalink
+		"/teams/#{slug}"
+	end
+
+	def to_soulmate
+		# {"id":1,"term":"Dodger Stadium","score":85,"data":{"url":"\/dodger-stadium-tickets\/","subtitle":"Los Angeles, CA"}}
+		{ :id => id, :term => name, :score => 1, :data => { :url => permalink, :subtitle => "#{city}, #{country}" }}.to_json
+	end
+
+	# include MongoMapper::Document
+	# plugin MongoMapper::Plugins::IdentityMap
 	
 	# key :name, String, :required => true
 	# key :slug, String, :required => true, :unique => true
@@ -31,16 +55,4 @@ class Team < Ohm::Model
 	# 	})
 	# end
 	# 
-	# before_validation do |t|
-	# 	t.slug = "#{t.name}".dasherize
-	# end
-	# 
-	# def definite_name
-	# 	(the ? 'the ' : '') + name
-	# end
-	# 
-	# def permalink
-	# 	"/#{slug}"
-	# end
-
 end

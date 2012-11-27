@@ -8,14 +8,36 @@
 # end
 
 class Venue < Ohm::Model
-	# include MongoMapper::Document
-	# plugin MongoMapper::Plugins::IdentityMap
-	
 	attribute :name
 	attribute :address
+	attribute :zip
+	attribute :crossstreet
 	attribute :city
 	attribute :state
+	attribute :phone
+	attribute :latitude
+	attribute :longitude
 	attribute :foursquare_id
+	attribute :twitter
+	attribute :slug; index :slug
+	include Ohm::Timestamps
+	include Ohm::Callbacks
+	
+	def before_save
+		self.slug = self.name.dasherize
+	end
+
+	def to_soulmate
+		# {"id":1,"term":"Dodger Stadium","score":85,"data":{"url":"\/dodger-stadium-tickets\/","subtitle":"Los Angeles, CA"}}
+		{ :id => id, :term => name, :score => 1, :data => { :url => permalink, :subtitle => "#{city}, #{state}" }}.to_json
+	end
+
+	def permalink
+		"/venues/#{slug}"
+	end
+	
+	# include MongoMapper::Document
+	# plugin MongoMapper::Plugins::IdentityMap
 	
 	# key :name, String, :required => true
 	# key :slug, String, :required => true, :unique => true

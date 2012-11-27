@@ -20,8 +20,7 @@ get '/venues/search' do
 end
 
 get '/venues/:slug' do
-	@venue = Venue.find_by_slug(params[:slug])
-	@teams = teams_for_select
+	pass unless @venue = Venue.find(:slug => params[:slug]).first
 	erb :'venues/show'
 end
 
@@ -43,13 +42,13 @@ post '/venues' do
 	redirect venue.permalink
 end
 
-get '/venues' do
+get '/venues/?' do
 	redirect '/' unless (request.cookies['admin'] == $config[:secret])
-	@venues = Venue.all(:order => 'country, state, city, name')
+	@venues = Venue.all
 	erb :'venues/index'
 end
 
-post '/venues/:slug/bonds' do
+post '/venues/:slug/bonds/?' do
 	# params.inspect
 	venue = Venue.find_by_slug(params[:slug])
 	venue.bonds << Bond.new(params[:bond])

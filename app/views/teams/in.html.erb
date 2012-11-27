@@ -1,12 +1,12 @@
 <% content_for :page_title do %>
-	<%= "Where to watch #{@team.definite_name.titleize} in #{@city.name}, #{@city.statecode}" %>
+	<%= "Where to watch #{@team.definite_name.titleize} in #{@city.name}, #{@city.state}" %>
 <% end %>
 
 <% content_for :page_body do %>
-	<h1>Where to watch <%= "#{@team.definite_name.titleize} in #{@city.name}, #{@city.statecode}" %></h1>
+	<h1>Where to watch <%= "#{@team.definite_name.titleize} in #{@city.name}, #{@city.state}" %></h1>
 	
 	<% if @venues.blank? %>
-		We don't know of anyplace to watch <%= @team.definite_name %> in <%= @city.name %>. <a href="/venues/new?location=<%= URI.escape "#{@city.name}, #{@city.statecode}" %>&team=<%= @team.slug %>">Add one?</a>
+		We don't know of anyplace to watch <%= @team.definite_name %> in <%= @city.name %>. <a href="/venues/new?location=<%= URI.escape "#{@city.name}, #{@city.state}" %>&team=<%= @team.slug %>">Add one?</a>
 	<% else %>
 		<ul>
 			<%= partial :'venues/show', :collection => @venues %>

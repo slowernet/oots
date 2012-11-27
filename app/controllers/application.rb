@@ -1,7 +1,4 @@
 get '/' do
-	# @teams = CACHE.fetch("teams") do
-	# end
-	@teams = teams_for_select
 	erb :'venues/search'
 end
 
@@ -25,25 +22,23 @@ get "/#{$config[:secret]}" do
 	redirect '/'
 end
 
+get '/cities/?' do
+	@k = City.all
+	erb :'cities/index'
+end
+
+get "/cities/:slug" do
+	pass unless @city = City.find(:slug => params[:slug]).first
+	# @closest = City.geohashes.revrangebyscore(@city.geohash.to_i, "-inf", :limit => 16).drop(1)
+	# @closest += City.geohashes.rangebyscore(@city.geohash.to_i, "+inf", :limit => 166).drop(1)
+	@closest = City.kdtree.nearestk(@city.latitude.to_f, @city.longitude.to_f, 10).drop(1)
+	erb :'cities/show'
+end
+
 not_found do
 	redirect '/'
 end
 
 error 500..510 do
 	redirect '/'
-end
-
-def format_phone(p)
-	p.gsub!(/\D/,'')
-	"#{p[0..2]} #{p[3..5]} #{p[6..9]}"
-end
-
-def teams_for_select
-	Team.all.sort(:by => :name).map { |t| { 
-		:id => t.id, 
-		:label => t.name, 
-		:altnames => t.altnames, 
-		:the => t.the,
-		:permalink => t.permalink
-	}}
 end

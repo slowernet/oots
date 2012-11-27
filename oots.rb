@@ -4,15 +4,16 @@ require 'sinatra'
 require 'ohm'
 require 'ohm/contrib'
 require 'sinatra/reloader' if development?
-require 'oj'
-require 'geohash'
-require 'base32/crockford'
 require 'sinatra_more/markup_plugin' # http://github.com/nesquena/sinatra_more
 require 'sinatra_more/render_plugin'
 require 'sinatra/respond_to' # http://github.com/cehoffman/sinatra-respond_to
 # require 'active_support'; $KCODE = 'u'
 # require 'mongo_mapper'
 # require 'rack/gridfs' # only needed in the absence of nginx-gridfs mod; http://github.com/mdirolf/nginx-gridfs
+# require 'redis/objects'
+# require 'geohash'
+# require 'base32/crockford'
+require 'kdtree'
 
 %w(lib config).each { |path| Dir.glob("#{path}/**{,/*/**}/*.rb") { |f| load f } }
 
@@ -44,4 +45,4 @@ configure do
 	# helpers TemplateBundler::ViewHelper
 end
 
-%w(models controllers).each { |path| Dir[File.join(File.dirname(__FILE__), "app", path, "*.rb")].each { |f| require f } }
+%w(models controllers helpers).each { |path| Dir[File.join(File.dirname(__FILE__), "app", path, "*.rb")].each { |f| require f } }
