@@ -24,7 +24,7 @@ class Venue < Ohm::Model
 	include Ohm::Callbacks
 	
 	def before_save
-		self.slug = self.name.dasherize
+		self.slug = "#{self.name} #{self.address} #{self.city}".dasherize
 	end
 
 	def to_soulmate

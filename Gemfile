@@ -22,7 +22,6 @@ gem 'redis-rack-cache', '1.2'
 gem 'kdtree'
 gem 'geo-distance'
 
-
 # gem 'activesupport', '3.2.3'
 # gem 'mongo', '1.6.2'
 # gem 'bson', '1.6.2'
