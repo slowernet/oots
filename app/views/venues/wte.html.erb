@@ -1,0 +1,177 @@
+<% content_for :page_body do %>
+	
+	<div style="color: #bbb; font-size: 76px; font-family: DINBold; position: relative; line-height: 1em;">WHERE TO EAT</div>
+	<div class="wte-search-form" style="margin-top: 0px;">
+		<div style="position: absolute; width: 50%; left: 0; top: 19px;">
+			<!-- <div class="caption">Looking for</div> -->
+			<div class="btn-group"  data-toggle="buttons-radio" style="margin-right: 10px;">
+				<button class="btn btn-large active">best</button>
+				<button class="btn btn-large">new</button>
+			</div>
+		</div>
+		
+		<div style="position: absolute; width: 50%; left: 28%; top: 0;">
+			<!-- <div class="caption">Dish or cuisine</div> -->
+			<input class="soulmate" type="text" data-types="cusine" placeholder="cuisine" autocomplete="off" style="width: 357px; padding: 11px;">
+		</div>
+	
+		<div style="position: absolute; left: 0; top: 68px;">
+			<!-- <div class="caption">In</div> -->
+			<input class="soulmate" id="locale" type="text" placeholder="near..." data-types="city" autocomplete="off" style="margin-top: -1px; padding: 11px; width: 417px; border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0;">
+		</div>
+
+		<div class="circle" style="z-index: 10; position: absolute; left: 407px; top: 98px; height: 22px; width: 22px; font-family: DINBold; font-size: 11px; text-align: center; line-height: 20px; background-color: white; border: 1px solid #666; color: #444">OR</div>
+		
+		<div style="position: absolute; left: 417px; top: 68px;">
+			<div class="caption">&nbsp;</div>
+			<button class="btn btn-large" id="near-me" data-toggle="button" style="margin-right: 14px; font-size: 16px; border-top-left-radius: 0; border-bottom-left-radius: 0;  ">
+				Near me
+			</button>
+		</div> 	
+		
+		<div style="position: absolute; width: 50%; left: 0%; top: 156px;">
+			<!-- <div class="caption">Price point</div> -->
+			<div class="btn-group" data-toggle="buttons-checkbox">
+				<button class="btn btn-small" title="inexpensive">$</button>
+				<button class="btn btn-small" title="mid-priced">$$</button>
+				<button class="btn btn-small" title="expensive">$$$</button>
+			</div>
+		</div>
+
+		<div style="position: absolute; width: 50%; left: 22%; top: 156px;">
+			<div class="caption" style="display: inline; margin-right: 2px;">Good for</div>
+			<div class="btn-group" data-toggle="buttons-checkbox">
+				<button class="btn btn-small">groups</button>
+				<button class="btn btn-small">kids</button>
+				<button class="btn btn-small">an occasion</button>
+			</div>
+		</div>
+
+		<div style="position: absolute; left: 476px; top: 165px;">
+			<!-- <button class="btn btn-small">Find</button> -->
+		</div>
+		
+		<div style="position: absolute; left: 0; top: 196px; width: 530px; height: 300px;" id="user-location-map"></div>
+	</div>
+<% end %>
+
+<% content_for :page_end do %>
+	<script type="text/javascript" charset="utf-8">
+		$script.ready('_bundle', function() {
+			$script([
+				"//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js",
+			], function() {
+				$(document).ready(function() {
+					$('#header').hide();
+					$('body').button();
+				
+					$('button#near-me').click(function(ev) {
+						// nb. class="active" is added after this handler (race?)
+						$('input[type=text]#locale').prop('disabled', !$('button#near-me').hasClass('active'));
+						
+						if (!$('button#near-me').hasClass('active') && ("geolocation" in navigator)) {
+							navigator.geolocation.getCurrentPosition(
+								function (position) {
+									if (!$('#user-location-map').hasClass('leaflet-container')) {
+										$('#user-location-map:not(.intialized)').leaflet({
+											points: [[position.coords.latitude, position.coords.longitude]],
+											markerClick: function(e) { 
+												e.target.options.click(e) 
+											},
+											afterInit: function(map) { 
+												L.circle(
+													[position.coords.latitude, position.coords.longitude], 
+													position.coords.accuracy
+												).addTo(map);
+											}
+										});
+									}
+								}, 
+							    function (error) { console.log(error.message); },
+							    { 
+									enableHighAccuracy: true, 
+									timeout: 10 * 1000,
+									maximumAge: 60 * 1000
+								}
+							);
+							$('#user-location-map').show();
+						} else {
+							$('#user-location-map').hide();
+						}
+					});
+				});
+			});
+		});
+	</script>
+<% end %>
+
+<% content_for :page_head do %>
+	<link href="/stylesheets/vendor/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+
+	<style type="text/css" media="screen">
+		@font-face {
+		    font-family: 'DINBold';
+		    src: url('http://cdn.cstatic.net/stylesheets/fonts/ff_din_bold-webfont.eot');
+		    src: url('http://cdn.cstatic.net/stylesheets/fonts/ff_din_bold-webfont.eot?iefix') format('eot'),
+		         url('http://cdn.cstatic.net/stylesheets/fonts/ff_din_bold-webfont.woff') format('woff'),
+		         url('http://cdn.cstatic.net/stylesheets/fonts/ff_din_bold-webfont.ttf') format('truetype'),
+		         url('http://cdn.cstatic.net/stylesheets/fonts/ff_din_bold-webfont.svg#webfontPzPObx4X') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+
+		#page-body { padding-top: 9px; background-color: white; }
+
+		.wte-search-form .btn {
+			font-family: DINBold;
+			text-transform: uppercase;
+			color: #888; 
+		}
+
+		.wte-search-form .btn.btn-large { }
+
+		.wte-search-form .btn.active {
+			color: #000;
+		}
+		.wte-search-form .caption {
+			padding: 0 0 4px 2px;
+			font-family: DINBold;
+			text-transform: uppercase;
+			color: #888;
+			font-size: 12px;
+		}
+
+		.wte-search-form input::-webkit-input-placeholder,
+		.wte-search-form input::-moz-placeholder {
+			color: #888;
+		}
+
+		.wte-search-form {
+			margin-bottom: 30px; position: relative; height: 600px;
+		}
+		.wte-search-form input[type=text] {
+			position: absolute; top: 20px; font-size: 16px; color: #555; font-family: 'DINBold';
+			text-transform: uppercase;
+/*			box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);*/
+			padding: 10px; 0
+/*			border-color: #ddd;*/
+		}
+		input[type="text"].soulmate {
+			border-color: #ccc;
+		}
+		.wte-search-form input[type=text]:disabled {
+			color: white;
+		}
+		.wte-search-form input:disabled::-webkit-input-placeholder,
+		.wte-search-form input:disabled::-moz-placeholder {
+			color: white;
+		}
+		
+		.wte-search-form .circle {
+			border-radius: 50%;
+/*			background-color: yellow;*/
+/*			box-shadow: 2px 2px 0 #888;*/
+		}
+	</style>
+<% end %>

@@ -9,7 +9,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'> -->
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/stylesheets/public.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
 	 <!--[if lte IE 8]>
@@ -18,7 +19,7 @@
 	
 	<meta name="description" content="<%= pt = yield_content(:page_title); (pt.blank? ? "" : "#{pt.strip}. ") %>Out of Town Sports (OOTS) is a directory of places to watch your team wherever you are." />
 	<meta name="keywords" content="Out of Town Sports, OOTS, sports bars, where to watch, sports fans, nfl sunday ticket, mlb extra innings, red zone, out of town fans, nfl, mlb, nba, nhl, epl, la liga, serie a, soccer, football, baseball, hockey, basketball, directory" />
-	<meta name="google-site-verification" content="6iCVeJOriIh80IZWpyYsTsMbGIA8UVOMZx7L3mt25ek" />
+	<meta name="google-site-verification" content="M74TMlxue1jw_HkeKIjQl0fEEssAIgQLHyEOdf05iA0" />
 	<link rel="canonical" href="<%= "#{$config[:base_url]}#{request.path_info}" %>" />
 
 	<script type="text/javascript" charset="utf-8">
@@ -34,7 +35,7 @@
 			<div style="position: relative">
 				<a class="site-logo" href="/" class="site-title">Out of Town Sports <span>beta</span></a>
 				<div style="width: 300px; position: absolute; right: 0; top: 24px;">
-					<input class="soulmate" type="text" placeholder="Search for teams, cities or venues" autocomplete="off">
+					<input class="soulmate" type="text" data-types="team venue city" placeholder="Search for teams, cities or venues" autocomplete="off">
 				</div>
 			</div>
 			<!-- <div id="location"><a href='#'>Set your location</a></div> -->
@@ -54,21 +55,22 @@
 				<li><a href="/about">About</a></li>
 			</ul>
 			<ul>
-				<li><a href="http://twitter.com/outoftownsports" target="_blank">Follow OOTS on Twitter</a></li>
-				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
-					<div id="mailing-list-signup" style="display: none;">
-						<%= partial :'meta/mailinglist' %>
-					</div>
-				</li>
-			</ul>
-			<ul>
 				<% if (request.cookies['admin'] == $config[:secret]) %>
 					<li><a href="/venues">Venues</a></li>
 					<li><a href='/teams'>Teams</a></li>
 					<li><a href="/cities">Cities</a></li>
 					<li><a href="/venues/new">New venue</a></li>
 					<li><a href="/teams/new">New team</a></li>
+					<li><a href="/wte">wte</a></li>
 				<% end %>
+			</ul>
+			<ul>
+				<li><a href="http://twitter.com/outoftownsports" target="_blank">Follow OOTS on Twitter</a></li>
+				<li><a href='#' onclick="$('#mailing-list-signup').show(); $(this).hide(); return false;">Mailing list</a>
+					<div id="mailing-list-signup" style="display: none;">
+						<%= partial :'meta/mailinglist' %>
+					</div>
+				</li>
 			</ul>
 			<div style="clear: both;"> </div>
 		</div>
@@ -91,34 +93,36 @@
 		$script([
 			"//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js",
 			"//ajax.cdnjs.com/ajax/libs/underscore.js/1.4.2/underscore-min.js",
-			
+			"//cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"			
 		], function() {
 			$script([
-				"/javascripts/vendor/jquery.soulmate.js",
-				// "/javascripts/vendor/jquery.pjax.js"
+				"/javascripts/vendor/jquery.soulmate.js"
 			], function() {
 				$script([
+					"/javascripts/app/jquery.leaflet.js",
 					"/javascripts/app/application.js"
 				], '_bundle')
 			});
 		});
 	</script>	
 	
+	<%= yield_content :page_end %>
+
 	<script type="text/javascript" charset="utf-8">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-19133487-2']);
 		_gaq.push(['_trackPageview']);
 
 		_qoptions = { qacct: "p-6b24jK0EWRBbE" };
-		$script([
-			"//edge.quantserve.com/quant.js",
-			"//google-analytics.com/ga.js"
-		]);
+		$script.ready('_bundle', function() {
+			$script([
+				"//edge.quantserve.com/quant.js",
+				"//google-analytics.com/ga.js"
+			]);
+		});
 	</script>	
 	<noscript>
 		<img src="http://pixel.quantserve.com/pixel/p-6b24jK0EWRBbE.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast">
 	</noscript>
-
-	<%= yield_content :page_end %>
 </body>
 </html>

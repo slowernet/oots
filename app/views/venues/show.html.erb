@@ -1,3 +1,7 @@
+<% content_for :page_head do %>
+	<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+<% end %>
+
 <% content_for :page_title do %>
 	<%= "#{@venue.name} at #{@venue.address} in #{@venue.city} #{@venue.zip}" %>
 <% end %>
@@ -15,8 +19,26 @@
 			<% end %>				
 		</ul>
 		<ul style="position: absolute; top: 0; right: 0; line-height: 1.2em;">
-			<li><img class="defer" height="158" width="400" data-src="http://maps.google.com/maps/api/staticmap?zoom=15&size=408x158&maptype=roadmap&markers=color:red|<%= "#{@venue.address},#{@venue.city} #{@venue.zip}" %>&sensor=false" alt=" " /></li>
-			<li style="text-align: right;"><a href="http://maps.google.com/?q=<%= URI.escape "#{@venue.name}, #{@venue.address}, #{@venue.city} #{@venue.zip}" %>" target="_blank">big map</a></li>
+			<li>
+				<div id="map" class="map" style="width: 400px; height: 200px;"></div>
+				<a href="http://maps.google.com/?q=<%= URI.escape "#{@venue.name}, #{@venue.address}, #{@venue.city} #{@venue.zip}" %>" target="_blank" style="font-size: 70%; text-align: right;">
+					big map
+					<!-- <img height="158" width="400" src="http://maps.google.com/maps/api/staticmap?zoom=15&size=408x158&maptype=roadmap&markers=color:red|<%= "#{@venue.address},#{@venue.city} #{@venue.zip}" %>&sensor=false" alt="<%= @venue.name %>" border="0"> -->
+				</a>
+			</li>
 		</ul>
 	</div>
 <% end %>
+
+<% content_for :page_end do %>
+	<script type="text/javascript" charset="utf-8">
+		$script.ready('_bundle', function() {
+			$(document).ready(function() {
+				$('.map:visible:not(.intialized)').leaflet({
+					points: <%= [[ @venue.latitude.to_f, @venue.longitude.to_f, @venue.name.to_s, @venue.permalink ]].to_json %>,
+					markerClick: function(e) { e.target.options.click(e) }
+				})
+			});
+		});
+	</script>
+<% end %>	

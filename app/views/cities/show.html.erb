@@ -8,8 +8,8 @@
 	<p>Pop. <%= @city.population.to_s.reverse.gsub(%r{([0-9]{3}(?=([0-9])))}, "\\1,").reverse %></p>
 
 	<% require 'geo-distance' %>
-	<p><table cellspacing="8"><thead><tr><th>city</th><th>distance</th></tr></thead><tr><td>
-	<%= @closest.map { |id| City[id] }.map {|c| [c, GeoDistance::Haversine.geo_distance( @city.latitude, @city.longitude, c.latitude, c.longitude).to_meters/1000 ] }.sort { |a,b| a[1] <=> b[1] }.map { |c| c.join('</td><td>') }.join('</td></tr><tr><td>') %></td></tr></table></p>
+	<p><table cellspacing="8"><thead><tr><th>city</th><th>km</th></tr></thead><tr><td>
+	<%= @closest.map { |id| City[id] }.map {|c| ["<a href='#{c.permalink}'>#{c}</a>", GeoDistance::Haversine.geo_distance( @city.latitude, @city.longitude, c.latitude, c.longitude).to_meters/1000 ] }.sort { |a,b| a[1] <=> b[1] }.map { |c| c.join('</td><td>') }.join('</td></tr><tr><td>') %></td></tr></table></p>
 
 	<% if (request.cookies['admin'] == $config[:secret]) %><a href="/teams/<%= @city.slug %>/edit" style="padding: 1em 0; display: block;">edit</a><% end %>
 <% end %>

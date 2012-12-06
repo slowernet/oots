@@ -6,10 +6,10 @@ html {
 }
 
 body { 
-	font-family: "Open Sans";
+	font-family: "Source Sans Pro", "Open Sans";
 	color: #ccc;
 	min-height: 100%;
-	font-size: 11pt;
+	font-size: 16px;
 }
 
 a, a:visited { 
@@ -21,9 +21,18 @@ a, a:visited {
 /*	html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
 }
 
+h1, h2, h3, h4 {
+	text-transform: uppercase;
+    font-weight: 600;
+    text-rendering: optimizeLegibility;
+	color: #aaa;
+}
+
 h1 {
-	font-size: 15pt;
+	font-size: 43px;
 	margin-bottom: 14pt;
+	text-shadow: 0 1px 0 rgba(32, 32, 32, 1);
+/*  letter-spacing: 1px;*/
 }
 
 h2 {
@@ -36,10 +45,6 @@ h3 {
 	margin-bottom: 7pt;
 }
 
-h1, h2, h3, h4 {
-	font-weight: normal;
-}
-
 label {
 /*	font-size: 13px;*/
 	color: #555;
@@ -50,7 +55,7 @@ ul {
 }
 
 img.defer {
-	background: transparent url(/images/spinner.gif) 50% 50% no-repeat;
+/*  background: transparent url(/images/spinner.gif) 50% 50% no-repeat;*/
 }
 
 p {
@@ -95,12 +100,14 @@ p {
 	display: block;
 	position: absolute;
 	left: 0px;
-	top: 32px;
+	top: 30px;
 /*	color: #a44;*/
 	color: #d0d0d0;
-	font-weight: 700;
-	font-size: 12px;
+/*  font-weight: 700;*/
+    font-weight: 600;
+	font-size: 14px;
 	text-transform: uppercase;
+  text-rendering: optimizeLegibility;
 }
 
 #header a.site-logo span {
@@ -163,8 +170,8 @@ ul.list {
 }
 
 #footer ul {
-	font-size: 11px;
-	font-weight: 700;
+	font-size: 13px;
+	font-weight: 600;
 	text-transform: uppercase;
 	float: left;
 	width: 33%;
@@ -253,7 +260,7 @@ ul.list {
 input[type=text].soulmate {
 	border: 1px solid #999;
 	color: #545C5F;
-	font-family: "Open Sans", Helvetica, "Helvetica Neue", Arial, sans-serif;
+	font-family: "Source Sans Pro", "Open Sans", Helvetica, "Helvetica Neue", Arial, sans-serif;
 	font-size: 20px;
 	letter-spacing: 0.5px;
 	margin: 0 auto;
@@ -272,7 +279,7 @@ input[type=text].soulmate {
 	border: 1px solid #999;
 	border-top: none;
 	display: none;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 /*	font: 14px/16px "Open Sans", Helvetica, Arial, sans-serif;*/
 	font-weight: normal;
 	list-style: none;
@@ -336,7 +343,8 @@ input[type=text].soulmate {
 #soulmate .soulmate-suggestion .subtitle {
 	font-size: 10px; 
 	text-transform: uppercase; 
-	font-weight: 700; 
+	font-weight: 600;
+/*  font-weight: 700; */
 	color: #999;
 }
 
@@ -347,9 +355,9 @@ input[type=text].soulmate {
 #soulmate .soulmate-type {
 	background-color: white;
 	color: #888;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	font-weight: 500;
+	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: 400;
 	letter-spacing: 0.5px;
 	margin-right: 80%;
 	padding: 5px 10px 0 10px;
@@ -446,12 +454,12 @@ body.venues.search #header .soulmate {
 #header input::-webkit-input-placeholder { color: #666; }
 
 #header input[type=text].soulmate {
-    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAA4ElEQVQoFXXBvSpGARgA4FeSBQNWJXcgxWizS1lkQZyyPaVk4QYkk5KFhWRyA3IDbGwGP5NCEj7hJSc+Z/ieJ+KbJqMOXHlyZk1/VGm3LaV3L1J6UESdVjvSnSW92gzZldJE/DLqw43h+GNRutYdJYfSQlQ4koooufGuLyrMS5tR8qimIyqMS3tRcu7TYFRYkVajZF3ain90upBGomTAgzeLmuOHHofSadQppHSsMGbZtZSeFVFn0qWUUkon3qSaIup0mbZp36oRLWa8SqmIRsxJ6dVUNGJWTbqPxsy4tfEF9hqMEPwCchUAAAAASUVORK5CYII=) no-repeat 0 60%;
-    font-size: 12px;
-    padding: 5px 7px 4px 22px;
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAA4ElEQVQoFXXBvSpGARgA4FeSBQNWJXcgxWizS1lkQZyyPaVk4QYkk5KFhWRyA3IDbGwGP5NCEj7hJSc+Z/ieJ+KbJqMOXHlyZk1/VGm3LaV3L1J6UESdVjvSnSW92gzZldJE/DLqw43h+GNRutYdJYfSQlQ4koooufGuLyrMS5tR8qimIyqMS3tRcu7TYFRYkVajZF3ain90upBGomTAgzeLmuOHHofSadQppHSsMGbZtZSeFVFn0qWUUkon3qSaIup0mbZp36oRLWa8SqmIRsxJ6dVUNGJWTbqPxsy4tfEF9hqMEPwCchUAAAAASUVORK5CYII=) no-repeat 0 55%;
+    font-size: 14px;
+    padding: 5px 7px 4px 24px;
     background-color: transparent;
     border-color: transparent;
     color: #d0d0d0;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 600;
 }
