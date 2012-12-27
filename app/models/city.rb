@@ -15,16 +15,12 @@ class City < Ohm::Model
 	attribute :slug; index :slug
 	include Ohm::Callbacks
 
-	# include Redis::Objects
-	# sorted_set :geohashes, :global => true
-
 	cattr_accessor :kdtree do
 		Kdtree.new(City.all.map { |c| [c.latitude.to_f, c.longitude.to_f, c.id.to_i] })
 	end
 	
 	def before_save
 		self.slug = "#{self.name} #{self.state}".dasherize
-		# City.geohashes[self.id] = self.geohash = Base32::Crockford.decode(GeoHash.encode(self.latitude.to_f, self.longitude.to_f)).to_i
 	end
 
 	def to_s

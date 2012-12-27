@@ -18,9 +18,11 @@ require 'kdtree'
 %w(lib config).each { |path| Dir.glob("#{path}/**{,/*/**}/*.rb") { |f| load f } }
 
 module Sinatra
+	use Rack::Runtime
+
 	register SinatraMore::MarkupPlugin
 	register SinatraMore::RenderPlugin
-	register Sinatra::RespondTo
+	register Sinatra::RespondTo	
 end
 
 configure do

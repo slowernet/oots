@@ -29,8 +29,6 @@ end
 
 get "/cities/:slug" do
 	pass unless @city = City.find(:slug => params[:slug]).first
-	# @closest = City.geohashes.revrangebyscore(@city.geohash.to_i, "-inf", :limit => 16).drop(1)
-	# @closest += City.geohashes.rangebyscore(@city.geohash.to_i, "+inf", :limit => 166).drop(1)
 	@closest = City.kdtree.nearestk(@city.latitude.to_f, @city.longitude.to_f, 21).drop(1)
 	erb :'cities/show'
 end

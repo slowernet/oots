@@ -1,8 +1,9 @@
 <% content_for :page_body do %>
 	
-	<div style="color: #bbb; font-size: 76px; font-family: DINBold; position: relative; line-height: 1em;">WHERE TO EAT</div>
-	<div class="wte-search-form" style="margin-top: 0px;">
-		<div style="position: absolute; width: 50%; left: 0; top: 19px;">
+	<div style="color: #bbb; font-size: 24px; font-family: DINBold; position: relative; line-height: 1em; margin-top: 6px;">WHERE TO EAT</div>
+
+	<div class="wte-search-form" style="margin-top: 14px;">
+		<div style="position: absolute; left: 0; top: 0px;">
 			<!-- <div class="caption">Looking for</div> -->
 			<div class="btn-group"  data-toggle="buttons-radio" style="margin-right: 10px;">
 				<button class="btn btn-large active">best</button>
@@ -10,7 +11,7 @@
 			</div>
 		</div>
 		
-		<div style="position: absolute; width: 50%; left: 28%; top: 0;">
+		<div style="position: absolute; left: 28%; top: 0;">
 			<!-- <div class="caption">Dish or cuisine</div> -->
 			<input class="soulmate" type="text" data-types="cusine" placeholder="cuisine" autocomplete="off" style="width: 357px; padding: 11px;">
 		</div>
@@ -20,16 +21,16 @@
 			<input class="soulmate" id="locale" type="text" placeholder="near..." data-types="city" autocomplete="off" style="margin-top: -1px; padding: 11px; width: 417px; border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0;">
 		</div>
 
-		<div class="circle" style="z-index: 10; position: absolute; left: 407px; top: 98px; height: 22px; width: 22px; font-family: DINBold; font-size: 11px; text-align: center; line-height: 20px; background-color: white; border: 1px solid #666; color: #444">OR</div>
+		<div class="circle" style="z-index: 10; position: absolute; left: 407px; top: 78px; height: 22px; width: 22px; font-family: DINBold; font-size: 11px; text-align: center; line-height: 20px; background-color: white; border: 1px solid #666; color: #444">OR</div>
 		
-		<div style="position: absolute; left: 417px; top: 68px;">
+		<div style="position: absolute; left: 417px; top: 48px;">
 			<div class="caption">&nbsp;</div>
 			<button class="btn btn-large" id="near-me" data-toggle="button" style="margin-right: 14px; font-size: 16px; border-top-left-radius: 0; border-bottom-left-radius: 0;  ">
 				Near me
 			</button>
 		</div> 	
 		
-		<div style="position: absolute; width: 50%; left: 0%; top: 156px;">
+		<div style="position: absolute; width: 50%; left: 0%; top: 136px;">
 			<!-- <div class="caption">Price point</div> -->
 			<div class="btn-group" data-toggle="buttons-checkbox">
 				<button class="btn btn-small" title="inexpensive">$</button>
@@ -38,7 +39,7 @@
 			</div>
 		</div>
 
-		<div style="position: absolute; width: 50%; left: 22%; top: 156px;">
+		<div style="position: absolute; width: 50%; left: 22%; top: 136px;">
 			<div class="caption" style="display: inline; margin-right: 2px;">Good for</div>
 			<div class="btn-group" data-toggle="buttons-checkbox">
 				<button class="btn btn-small">groups</button>
@@ -47,7 +48,7 @@
 			</div>
 		</div>
 
-		<div style="position: absolute; left: 476px; top: 165px;">
+		<div style="position: absolute; left: 476px; top: 145px;">
 			<!-- <button class="btn btn-small">Find</button> -->
 		</div>
 		
@@ -151,7 +152,7 @@
 			margin-bottom: 30px; position: relative; height: 600px;
 		}
 		.wte-search-form input[type=text] {
-			position: absolute; top: 20px; font-size: 16px; color: #555; font-family: 'DINBold';
+			position: absolute; font-size: 16px; color: #555; font-family: 'DINBold';
 			text-transform: uppercase;
 /*			box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);*/
 			padding: 10px; 0
